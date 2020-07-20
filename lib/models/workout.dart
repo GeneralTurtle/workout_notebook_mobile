@@ -5,4 +5,5 @@ class Workout {
   Workout(this._name, this._uuid);
 
   String get name => _name;
+  String get uuid => _uuid;
 }
