@@ -5,7 +5,7 @@ void main() {
   testWidgets('Empty test', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
 
-    final titleFinder = find.text('No days workouts to display...');
+    final titleFinder = find.text('Workouts');
 
     expect(titleFinder, findsOneWidget);
   });
