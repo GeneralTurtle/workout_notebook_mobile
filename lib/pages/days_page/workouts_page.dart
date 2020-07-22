@@ -12,15 +12,10 @@ class WorkoutsPage extends StatelessWidget {
           appBar: AppBar(
             title: Text('Workouts'),
           ),
-          body: FutureBuilder(
-            future: workoutsState.fetchWorkouts(),
-            builder: (context, snapshot) {
-              return Center(
-                child: workoutsState.workouts.isEmpty
-                    ? Text('No days workouts to display...')
-                    : WorkoutsList(),
-              );
-            },
+          body: Center(
+            child: workoutsState.workouts.isEmpty
+                ? Text('No days workouts to display...')
+                : WorkoutsList(),
           ),
         );
       },
