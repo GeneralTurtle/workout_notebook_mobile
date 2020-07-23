@@ -23,7 +23,6 @@ void findOneText(String textToFind) {
   expect(finder, findsOneWidget);
 }
 
-
 class TestState implements WorkoutsState {
   static String title = 'Title';
   static String noWorkoutsMessage = 'nothing';
@@ -33,4 +32,10 @@ class TestState implements WorkoutsState {
 
   @override
   String get noWorkoutsDisplayMessage => noWorkoutsMessage;
+
+  @override
+  get hasWorkouts => false;
+
+  @override
+  void fetchWorkouts() {}
 }
