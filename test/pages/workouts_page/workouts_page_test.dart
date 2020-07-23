@@ -13,14 +13,15 @@ void main() {
       ),
     ));
 
-    final testState = TestState();
-    final titleFinder = find.text(testState.pageTitle);
+    final titleFinder = find.text(TestState.title);
 
     expect(titleFinder, findsOneWidget);
   });
 }
 
 class TestState implements WorkoutsState {
+  static String title = 'Title';
+
   @override
-  String get pageTitle => 'Title';
+  String get pageTitle => title;
 }
