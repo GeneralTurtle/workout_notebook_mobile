@@ -13,13 +13,16 @@ void main() {
       ),
     ));
 
-    final titleFinder = find.text(TestState.title);
-    final noWorkoutsMessageFinder = find.text(TestState.noWorkoutsMessage);
-
-    expect(titleFinder, findsOneWidget);
-    expect(noWorkoutsMessageFinder, findsOneWidget);
+    findOneText(TestState.title);
+    findOneText(TestState.noWorkoutsMessage);
   });
 }
+
+void findOneText(String textToFind) {
+  final finder = find.text(textToFind);
+  expect(finder, findsOneWidget);
+}
+
 
 class TestState implements WorkoutsState {
   static String title = 'Title';
