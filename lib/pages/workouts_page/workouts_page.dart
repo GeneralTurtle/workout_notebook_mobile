@@ -7,6 +7,7 @@ class WorkoutsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final workoutState = Provider.notListener<WorkoutsState>(context);
+    workoutState.fetchWorkouts();
 
     return Scaffold(
       appBar: _buildAppBar(workoutState),
