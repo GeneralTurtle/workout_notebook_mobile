@@ -26,6 +26,19 @@ void main() {
     state.fetchWorkouts();
     expect(true, state.hasWorkouts);
   });
+
+  test('Test new workout', () {
+    WorkoutsState state = _createWorkoutStateWithNoWorkouts();
+    final workouts = state.workouts;
+    expect(false, state.hasWorkouts);
+    expect(0, workouts.length);
+
+    state.newWorkout();
+
+    expect(true, state.hasWorkouts);
+    expect(1, workouts.length);
+    expect('New workout', workouts[0].name);
+  });
 }
 
 class WorkoutRepositoryWithWorkouts implements WorkoutRepository {

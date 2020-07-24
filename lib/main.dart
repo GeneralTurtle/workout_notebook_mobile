@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/pages/workouts_page/workouts_page.dart';
-import 'package:workout_notebook_mobile/provider_lib/providers.dart';
 import 'package:workout_notebook_mobile/repositories/workout_repository.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        Provider<WorkoutsState>(
+        ChangeNotifierProvider<WorkoutsState>(
           create: (context) => WorkoutsState(workoutRepository),
         ),
       ],

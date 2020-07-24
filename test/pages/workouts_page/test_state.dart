@@ -1,12 +1,12 @@
+import 'package:flutter/cupertino.dart';
+import 'package:workout_notebook_mobile/models/workout.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
-abstract class TestState implements WorkoutsState {
+class TestState with ChangeNotifier implements WorkoutsState{
   static String title = 'Title';
   static String noWorkoutsMessage = 'nothing';
 
-  final bool hasWorkout;
-
-  TestState(this.hasWorkout);
+  bool _hasWorkout = false;
 
   @override
   String get pageTitle => title;
@@ -15,16 +15,18 @@ abstract class TestState implements WorkoutsState {
   String get noWorkoutsDisplayMessage => noWorkoutsMessage;
 
   @override
-  get hasWorkouts => hasWorkout;
+  get hasWorkouts => _hasWorkout;
 
   @override
   void fetchWorkouts() {}
-}
 
-class TestStateNoWorkout extends TestState {
-  TestStateNoWorkout() : super(false);
-}
+  @override
+  void newWorkout() {
+    _hasWorkout = true;
+    notifyListeners();
+  }
 
-class TestStateWithWorkout extends TestState {
-  TestStateWithWorkout() : super(true);
+  @override
+  List<Workout> get workouts => [];
+
 }
