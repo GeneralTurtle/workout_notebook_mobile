@@ -22,5 +22,6 @@ class WorkoutsState extends ChangeNotifier {
 
   void deleteWorkout(String uuid) {
     _workouts.removeWhere((element) => uuid == element.uuid);
+    notifyListeners();
   }
 }

@@ -26,14 +26,21 @@ void main() {
   });
 
   test('Test delete workout', () {
-    final state = WorkoutsState();
-    state.newWorkout();
-
-    expect(true, state.hasWorkouts);
-
+    WorkoutsState state = _createNoEmptyState();
     final workout = state.workouts[0];
+    var deleted = false;
+    state.addListener(() => deleted = true);
+
     state.deleteWorkout(workout.uuid);
     expect(false, state.hasWorkouts);
-    
+    expect(true, deleted);
+
   });
+}
+
+WorkoutsState _createNoEmptyState() {
+  final state = WorkoutsState();
+  state.newWorkout();
+  expect(true, state.hasWorkouts);
+  return state;
 }
