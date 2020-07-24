@@ -3,17 +3,17 @@ import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
 void main() {
   test('Test page title', () {
-    WorkoutsState state = _createWorkoutStateWithNoWorkouts();
+    WorkoutsState state = WorkoutsState();
     expect('WORKOUTS', state.pageTitle);
   });
 
   test('Test no workouts display message', () {
-    WorkoutsState state = _createWorkoutStateWithNoWorkouts();
+    WorkoutsState state = WorkoutsState();
     expect('No workouts to display...', state.noWorkoutsDisplayMessage);
   });
 
   test('Test new workout', () {
-    WorkoutsState state = _createWorkoutStateWithNoWorkouts();
+    WorkoutsState state = WorkoutsState();
     final workouts = state.workouts;
     expect(false, state.hasWorkouts);
     expect(0, workouts.length);
@@ -24,9 +24,16 @@ void main() {
     expect(1, workouts.length);
     expect('New workout', workouts[0].name);
   });
-}
 
-WorkoutsState _createWorkoutStateWithNoWorkouts() {
-  WorkoutsState state = WorkoutsState();
-  return state;
+  test('Test delete workout', () {
+    final state = WorkoutsState();
+    state.newWorkout();
+
+    expect(true, state.hasWorkouts);
+
+    final workout = state.workouts[0];
+    state.deleteWorkout(workout.uuid);
+    expect(false, state.hasWorkouts);
+    
+  });
 }
