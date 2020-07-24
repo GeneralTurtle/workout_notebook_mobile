@@ -1,6 +1,4 @@
 import 'package:test/test.dart';
-import 'package:workout_notebook_mobile/models/workout.dart';
-import 'package:workout_notebook_mobile/repositories/workout_repository.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
 void main() {
@@ -12,19 +10,6 @@ void main() {
   test('Test no workouts display message', () {
     WorkoutsState state = _createWorkoutStateWithNoWorkouts();
     expect('No workouts to display...', state.noWorkoutsDisplayMessage);
-  });
-
-  test('Test has no workouts', () {
-    WorkoutsState state = _createWorkoutStateWithNoWorkouts();
-    state.fetchWorkouts();
-    expect(false, state.hasWorkouts);
-  });
-
-  test('Test has workouts', () {
-    final repositoryWithWorkouts = WorkoutRepositoryWithWorkouts();
-    WorkoutsState state = WorkoutsState(repositoryWithWorkouts);
-    state.fetchWorkouts();
-    expect(true, state.hasWorkouts);
   });
 
   test('Test new workout', () {
@@ -41,18 +26,7 @@ void main() {
   });
 }
 
-class WorkoutRepositoryWithWorkouts implements WorkoutRepository {
-  @override
-  List<Workout> fetchWorkouts() {
-    return [
-      Workout("name", "uuid")
-    ];
-  }
-
-}
-
 WorkoutsState _createWorkoutStateWithNoWorkouts() {
-  WorkoutRepository repository = WorkoutRepository();
-  WorkoutsState state = WorkoutsState(repository);
+  WorkoutsState state = WorkoutsState();
   return state;
 }

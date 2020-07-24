@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_notebook_mobile/models/workout.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
 class WorkoutList extends StatelessWidget {
@@ -11,13 +12,31 @@ class WorkoutList extends StatelessWidget {
 
   Widget _buildList(WorkoutsState state) {
     return state.hasWorkouts
-        ? Text('There are workouts')
+        ? _buildListOfWorkouts(state)
         : _buildNoWorkoutsView(state);
   }
 
   Widget _buildNoWorkoutsView(WorkoutsState state) {
     return Center(
       child: Text(state.noWorkoutsDisplayMessage),
+    );
+  }
+
+  Widget _buildListOfWorkouts(WorkoutsState state) {
+    return ListView.builder(
+      itemCount: state.workouts.length,
+      itemBuilder: (context, index) => _buildListItem(state.workouts[index]),
+    );
+  }
+
+  Widget _buildListItem(Workout workout) {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Text('${workout.name}'),
+          Text('${workout.uuid}'),
+        ],
+      ),
     );
   }
 }

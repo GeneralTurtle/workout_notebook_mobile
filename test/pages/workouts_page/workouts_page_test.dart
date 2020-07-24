@@ -4,35 +4,36 @@ import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/pages/workouts_page/workouts_page.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
-import 'test_state.dart';
-
 void main() {
   testWidgets('Empty workouts page', (WidgetTester tester) async {
+    final state = WorkoutsState();
     await tester.pumpWidget(MaterialApp(
-      home: ChangeNotifierProvider<WorkoutsState>(
-        create: (ctx) => TestState(),
+      home: ChangeNotifierProvider<WorkoutsState>.value(
+        value: state,
         child: WorkoutsPage(),
       ),
     ));
 
-    findOneText(TestState.title);
-    findOneText(TestState.noWorkoutsMessage);
+    findOneText(state.pageTitle);
+    findOneText(state.noWorkoutsDisplayMessage);
   });
 
   testWidgets('Add new workout to page', (WidgetTester tester) async {
-    final state = TestState();
-    state.newWorkout();
-
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<WorkoutsState>(
-        create: (ctx) => state,
+        create: (ctx) => _createNotEmptyState(),
         child: WorkoutsPage(),
       ),
     ));
 
-    findOneText('There are workouts');
-
+    findOneText('New workout');
   });
+}
+
+WorkoutsState _createNotEmptyState() {
+  final state = WorkoutsState();
+  state.newWorkout();
+  return state;
 }
 
 void findOneText(String textToFind) {
