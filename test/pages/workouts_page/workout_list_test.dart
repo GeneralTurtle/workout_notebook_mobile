@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:workout_notebook_mobile/pages/workouts_page/workouts_page.dart';
+import 'package:workout_notebook_mobile/pages/workouts_page/workout_list.dart';
 import 'package:workout_notebook_mobile/provider_lib/providers.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
@@ -11,12 +11,22 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: Provider<WorkoutsState>(
         create: (ctx) => TestStateNoWorkout(),
-        child: WorkoutsPage(),
+        child: WorkoutList(),
       ),
     ));
 
-    findOneText(TestState.title);
     findOneText(TestState.noWorkoutsMessage);
+  });
+
+  testWidgets('With workouts page', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Provider<WorkoutsState>(
+        create: (ctx) => TestStateWithWorkout(),
+        child: WorkoutList(),
+      ),
+    ));
+
+    findOneText('There are workouts');
   });
 }
 
