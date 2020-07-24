@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workout_notebook_mobile/pages/workouts_page/workouts_page.dart';
 import 'package:workout_notebook_mobile/provider_lib/providers.dart';
+import 'package:workout_notebook_mobile/repositories/workout_repository.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
 void main() {
@@ -11,10 +12,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final WorkoutRepository workoutRepository = WorkoutRepository();
+
     return MultiProvider(
       providers: [
         Provider<WorkoutsState>(
-          create: (context) => WorkoutsState(),
+          create: (context) => WorkoutsState(workoutRepository),
         ),
       ],
       child: MaterialApp(
