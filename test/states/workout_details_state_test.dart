@@ -15,17 +15,12 @@ void main() {
     expect(listenerNotified, true);
   });
 
-  test('Test stop edit state', () {
-    WorkoutDetailsState state = _createNewWorkoutState();
-    state.editWorkout();
-    var listenerNotified = false;
-    state.addListener(() => listenerNotified = true);
+  test('Test stop edit state with new name', () {
+    _stopEditWithName('toto');
+  });
 
-    expect(state.isEditing, true);
-
-    state.stopEditWorkout();
-    expect(state.isEditing, false);
-    expect(listenerNotified, true);
+  test('Test stop edit state with same name name', () {
+    _stopEditWithName('name');
   });
 
   test('Test get page title', () {
@@ -39,6 +34,21 @@ void main() {
     WorkoutDetailsState state = _createNewWorkoutState();
     expect(state.noExercisesDisplayMessage, 'No exercises to display ...');
   });
+}
+
+void _stopEditWithName(String name) {
+  WorkoutDetailsState state = _createNewWorkoutState();
+  state.editWorkout();
+  var listenerNotified = false;
+  state.addListener(() => listenerNotified = true);
+
+  expect(state.isEditing, true);
+
+  final newName = name;
+  state.stopEditWorkout(newName);
+  expect(state.isEditing, false);
+  expect(listenerNotified, true);
+  expect(state.pageTitle, newName);
 }
 
 WorkoutDetailsState _createNewWorkoutState() {

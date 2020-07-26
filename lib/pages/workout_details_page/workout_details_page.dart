@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
 class WorkoutDetailsPage extends StatelessWidget {
+  final TextEditingController titleController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<WorkoutDetailsState>(context);
@@ -25,6 +27,7 @@ class WorkoutDetailsPage extends StatelessWidget {
 
   TextField _editTitle(WorkoutDetailsState state) {
     return TextField(
+      controller: titleController,
       cursorColor: Colors.white,
       style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
@@ -54,7 +57,9 @@ class WorkoutDetailsPage extends StatelessWidget {
     return <Widget>[
       IconButton(
         icon: Icon(Icons.check),
-        onPressed: state.stopEditWorkout,
+        onPressed: () {
+          state.stopEditWorkout(titleController.text);
+        },
       ),
     ];
   }

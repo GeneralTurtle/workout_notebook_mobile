@@ -18,8 +18,15 @@ class WorkoutDetailsState with ChangeNotifier {
     notifyListeners();
   }
 
-  void stopEditWorkout() {
+  void stopEditWorkout(String newTitle) {
+    _updateWorkoutName(newTitle);
     _isEditing = false;
     notifyListeners();
+  }
+
+  void _updateWorkoutName(String newTitle) {
+    var isTitleDifferent = newTitle != pageTitle;
+    if(isTitleDifferent)
+      _workout = _workout.copyWith(name: newTitle);
   }
 }
