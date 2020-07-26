@@ -39,6 +39,8 @@ void main() {
   test('Test update workout', () {
     WorkoutsState state = WorkoutsState();
     state.newWorkout();
+    var listenersNotified = false;
+    state.addListener(() => listenersNotified = true);
 
     final initialWorkout = state.workouts[0];
     final newWorkout = initialWorkout.copyWith(name: 'newName');
@@ -47,6 +49,7 @@ void main() {
     expect(state.workouts.length, 1);
     expect(state.workouts[0].name, newWorkout.name);
     expect(state.workouts[0].uuid, initialWorkout.uuid);
+    expect(listenersNotified, true);
   });
 }
 
