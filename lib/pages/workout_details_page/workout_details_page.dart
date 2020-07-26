@@ -10,7 +10,7 @@ class WorkoutDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('${state.pageTitle}'),
       ),
-      body: Text('Workout details ...'),
+      body: Center(child: Text('No exercises to display ...'),),
     );
   }
 }
