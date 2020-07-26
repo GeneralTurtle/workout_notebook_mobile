@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_notebook_mobile/models/workout.dart';
+import 'package:workout_notebook_mobile/pages/workouts_page/workout_list_item.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
 class WorkoutList extends StatelessWidget {
@@ -25,35 +25,8 @@ class WorkoutList extends StatelessWidget {
   Widget _buildListOfWorkouts(WorkoutsState state) {
     return ListView.builder(
       itemCount: state.workouts.length,
-      itemBuilder: (context, index) => _buildListItem(state.workouts[index], state.deleteWorkout),
+      itemBuilder: (context, index) =>
+          WorkoutListItem(workout: state.workouts[index]),
     );
-  }
-
-  Widget _buildListItem(Workout workout, void Function(String uuid) deleteWorkout) {
-    return Card(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          _workoutCardInfo(workout),
-          _deleteButton(deleteWorkout, workout)
-        ],
-      ),
-    );
-  }
-
-  Widget _deleteButton(void deleteWorkout(String uuid), Workout workout) {
-    return IconButton(
-          icon: Icon(Icons.delete),
-          onPressed: () => deleteWorkout(workout.uuid),
-        );
-  }
-
-  Widget _workoutCardInfo(Workout workout) {
-    return Column(
-          children: <Widget>[
-            Text('${workout.name}'),
-            Text('${workout.uuid}'),
-          ],
-        );
   }
 }

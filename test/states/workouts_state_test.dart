@@ -4,25 +4,25 @@ import 'package:workout_notebook_mobile/states/workouts_state.dart';
 void main() {
   test('Test page title', () {
     WorkoutsState state = WorkoutsState();
-    expect('WORKOUTS', state.pageTitle);
+    expect(state.pageTitle, 'WORKOUTS');
   });
 
   test('Test no workouts display message', () {
     WorkoutsState state = WorkoutsState();
-    expect('No workouts to display...', state.noWorkoutsDisplayMessage);
+    expect(state.noWorkoutsDisplayMessage, 'No workouts to display...');
   });
 
   test('Test new workout', () {
     WorkoutsState state = WorkoutsState();
     final workouts = state.workouts;
-    expect(false, state.hasWorkouts);
-    expect(0, workouts.length);
+    expect(state.hasWorkouts, false);
+    expect(workouts.length, 0);
 
     state.newWorkout();
 
     expect(true, state.hasWorkouts);
-    expect(1, workouts.length);
-    expect('New workout', workouts[0].name);
+    expect(workouts.length, 1);
+    expect(workouts[0].name, 'New workout');
   });
 
   test('Test delete workout', () {
@@ -32,15 +32,29 @@ void main() {
     state.addListener(() => deleted = true);
 
     state.deleteWorkout(workout.uuid);
-    expect(false, state.hasWorkouts);
-    expect(true, deleted);
+    expect(state.hasWorkouts, false);
+    expect(deleted, true);
+  });
 
+  test('Test update workout', () {
+    WorkoutsState state = WorkoutsState();
+    state.newWorkout();
+    var listenersNotified = false;
+    state.addListener(() => listenersNotified = true);
+
+    final initialWorkout = state.workouts[0];
+    final newWorkout = initialWorkout.copyWith(name: 'newName');
+    state.updateWorkout(newWorkout);
+
+    expect(state.workouts.length, 1);
+    expect(state.workouts[0].name, newWorkout.name);
+    expect(state.workouts[0].uuid, initialWorkout.uuid);
+    expect(listenersNotified, true);
   });
 }
 
 WorkoutsState _createNoEmptyState() {
   final state = WorkoutsState();
   state.newWorkout();
-  expect(true, state.hasWorkouts);
   return state;
 }
