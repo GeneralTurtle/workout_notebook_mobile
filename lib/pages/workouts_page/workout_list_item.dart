@@ -29,8 +29,7 @@ class WorkoutListItem extends StatelessWidget {
 
   void _onTap(BuildContext context, WorkoutsState state) {
     final navigator = Provider.of<PagesNavigator>(context, listen: false);
-    state.selectWorkout(workout.uuid);
-    navigator.toWorkoutDetails(context);
+    navigator.toWorkoutDetails(context, workout);
   }
 
   Widget _deleteButton(void deleteWorkout(String uuid), Workout workout) {

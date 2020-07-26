@@ -35,16 +35,6 @@ void main() {
     expect(state.hasWorkouts, false);
     expect(deleted, true);
   });
-
-  test('Test select workout', () {
-    WorkoutsState state = _createNoEmptyState();
-    final workout = state.workouts[0];
-
-    state.selectWorkout(workout.uuid);
-    expect(state.selectedWorkout, workout);
-
-    expect(() => state.selectWorkout("wrong"), throwsException);
-  });
 }
 
 WorkoutsState _createNoEmptyState() {

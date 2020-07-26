@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:workout_notebook_mobile/models/workout.dart';
 
-class WorkoutDetailsState {
+class WorkoutDetailsState with ChangeNotifier {
   Workout _workout;
   var _isEditingTitle = false;
 
@@ -12,6 +13,6 @@ class WorkoutDetailsState {
 
   void editTitle() {
     _isEditingTitle = true;
+    notifyListeners();
   }
-
 }

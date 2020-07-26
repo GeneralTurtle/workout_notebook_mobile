@@ -6,10 +6,14 @@ void main() {
   test('Test edit title state', () {
     Workout workout = Workout('name', 'uuid');
     WorkoutDetailsState state = WorkoutDetailsState(workout);
+    var listenerNotified = false;
+    state.addListener(() => listenerNotified = true);
+
     expect(state.isEditingTitle, false);
 
     state.editTitle();
     expect(state.isEditingTitle, true);
+    expect(listenerNotified, true);
   });
 
   test('Test get page title', () {
