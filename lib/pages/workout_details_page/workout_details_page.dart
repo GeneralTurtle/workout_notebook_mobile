@@ -27,20 +27,25 @@ class WorkoutDetailsPage extends StatelessWidget {
 
   Widget _floatingActionButton(
       BuildContext context, WorkoutDetailsState state) {
-    return state.isEditing ? _addExerciseButton(context) : _noButton();
+    return state.isEditing ? _addExerciseButton(context, state) : _noButton();
   }
 
-  FloatingActionButton _addExerciseButton(BuildContext context) {
+  FloatingActionButton _addExerciseButton(
+      BuildContext context, WorkoutDetailsState state) {
     return FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () => _showAddExerciseBottomSheet(context),
+      onPressed: () => _showAddExerciseBottomSheet(context, state),
     );
   }
 
-  void _showAddExerciseBottomSheet(BuildContext context) {
+  void _showAddExerciseBottomSheet(
+      BuildContext ctx, WorkoutDetailsState state) {
     showModalBottomSheet(
-      context: context,
-      builder: (context) => AddExerciseSheet(),
+      context: ctx,
+      builder: (context) => ChangeNotifierProvider.value(
+        value: state,
+        child: AddExerciseSheet(),
+      ),
     );
   }
 

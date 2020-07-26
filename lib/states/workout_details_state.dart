@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_notebook_mobile/models/exercise.dart';
 import 'package:workout_notebook_mobile/models/workout.dart';
+import 'package:workout_notebook_mobile/uuid_lib/uuid.dart';
 
 class WorkoutDetailsState with ChangeNotifier {
   Workout _workout;
@@ -16,7 +17,7 @@ class WorkoutDetailsState with ChangeNotifier {
 
   Workout get workout => _workout;
 
-  get exercises => _workout.exercises;
+  List<Exercise> get exercises => _workout.exercises;
 
   void editWorkout() {
     _isEditing = true;
@@ -32,11 +33,28 @@ class WorkoutDetailsState with ChangeNotifier {
   void _updateWorkoutName(String newTitle) {
     var isTitleDifferent = newTitle != pageTitle;
     var isNewTitleNotEmpty = newTitle != '';
-    if(isTitleDifferent && isNewTitleNotEmpty)
+    if (isTitleDifferent && isNewTitleNotEmpty)
       _workout = _workout.copyWith(name: newTitle);
   }
 
-  void addExercise(Exercise exercise) {
+  void addExercise({
+    @required String name,
+    @required int numberOfSeries,
+    @required int numberOfReps,
+    @required int restTime,
+  }) {
+    Uuid uuid = Uuid();
+    Exercise exercise = Exercise(
+      name: name,
+      uuid: uuid.newUuid(),
+      numberOfRepetitions: numberOfReps,
+      numberOfSeries: numberOfSeries,
+      restTimeInSeconds: restTime,
+    );
+    _addExercise(exercise);
+  }
+
+  void _addExercise(Exercise exercise) {
     _workout = _workout.addExercise(exercise);
     notifyListeners();
   }

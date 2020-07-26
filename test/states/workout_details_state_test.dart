@@ -1,5 +1,4 @@
 import 'package:test/test.dart';
-import 'package:workout_notebook_mobile/models/exercise.dart';
 import 'package:workout_notebook_mobile/models/workout.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
@@ -46,17 +45,15 @@ void main() {
     state.addListener(() => listenerNotified = true);
     expect(state.exercises.length, 0);
 
-    Exercise exercise = Exercise(
-      uuid: 'exercise_uuid',
+    state.addExercise(
       name: 'exercise_name',
+      numberOfReps: 8,
       numberOfSeries: 4,
-      numberOfRepetitions: 8,
-      restTimeInSeconds: 90,
+      restTime: 90,
     );
-    state.addExercise(exercise);
 
     expect(state.exercises.length, 1);
-    expect(state.exercises[0], exercise);
+    expect(state.exercises[0].name, 'exercise_name');
     expect(listenerNotified, true);
   });
 }
