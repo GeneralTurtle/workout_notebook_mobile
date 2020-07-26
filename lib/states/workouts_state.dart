@@ -16,7 +16,7 @@ class WorkoutsState extends ChangeNotifier {
   void newWorkout() {
     final uuid = Uuid();
     final name = 'New workout';
-    _workouts.add(Workout(name, uuid.newUuid()));
+    _workouts.add(Workout(name: name, uuid:  uuid.newUuid()));
     notifyListeners();
   }
 

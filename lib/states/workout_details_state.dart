@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_notebook_mobile/models/exercise.dart';
 import 'package:workout_notebook_mobile/models/workout.dart';
 
 class WorkoutDetailsState with ChangeNotifier {
@@ -14,6 +15,8 @@ class WorkoutDetailsState with ChangeNotifier {
   String get noExercisesDisplayMessage => 'No exercises to display ...';
 
   Workout get workout => _workout;
+
+  get exercises => _workout.exercises;
 
   void editWorkout() {
     _isEditing = true;
@@ -31,5 +34,10 @@ class WorkoutDetailsState with ChangeNotifier {
     var isNewTitleNotEmpty = newTitle != '';
     if(isTitleDifferent && isNewTitleNotEmpty)
       _workout = _workout.copyWith(name: newTitle);
+  }
+
+  void addExercise(Exercise exercise) {
+    _workout = _workout.addExercise(exercise);
+    notifyListeners();
   }
 }
