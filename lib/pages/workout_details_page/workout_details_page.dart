@@ -8,7 +8,7 @@ class WorkoutDetailsPage extends StatelessWidget {
     final state = Provider.of<WorkoutDetailsState>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${state.pageTitle}'),
+        title: _pageTitle(state),
         actions: _actions(state),
       ),
       body: Center(
@@ -17,8 +17,28 @@ class WorkoutDetailsPage extends StatelessWidget {
     );
   }
 
+  Widget _pageTitle(WorkoutDetailsState state) {
+    return state.isEditing ? _editTitle(state) : _displayTitle(state);
+  }
+
+  Text _displayTitle(WorkoutDetailsState state) => Text('${state.pageTitle}');
+
+  TextField _editTitle(WorkoutDetailsState state) {
+    return TextField(
+      cursorColor: Colors.white,
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        hintText: state.pageTitle,
+        hintStyle: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
   List<Widget> _actions(WorkoutDetailsState state) {
-    return state.isEditing ? _editingModeActions(state) : _notEditingModeActions(state);
+    return state.isEditing
+        ? _editingModeActions(state)
+        : _notEditingModeActions(state);
   }
 
   List<Widget> _notEditingModeActions(WorkoutDetailsState state) {
