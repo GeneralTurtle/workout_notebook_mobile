@@ -19,9 +19,23 @@ class WorkoutDetailsPage extends StatelessWidget {
         body: Center(
           child: Text('${state.noExercisesDisplayMessage}'),
         ),
+        floatingActionButton: _floatingActionButton(state),
       ),
     );
   }
+
+  Widget _floatingActionButton(WorkoutDetailsState state) {
+    return state.isEditing ? _addExerciseButton() : _noButton();
+  }
+
+  FloatingActionButton _addExerciseButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () {},
+    );
+  }
+
+  SizedBox _noButton() => SizedBox.shrink();
 
   Widget _pageTitle(WorkoutDetailsState state) {
     return state.isEditing ? _editTitle(state) : _displayTitle(state);
@@ -68,7 +82,8 @@ class WorkoutDetailsPage extends StatelessWidget {
     ];
   }
 
-  Future<bool> _onBackPressed(BuildContext context, WorkoutDetailsState state) async {
+  Future<bool> _onBackPressed(
+      BuildContext context, WorkoutDetailsState state) async {
     final workoutsState = Provider.of<WorkoutsState>(context, listen: false);
     workoutsState.updateWorkout(state.workout);
     return true;
