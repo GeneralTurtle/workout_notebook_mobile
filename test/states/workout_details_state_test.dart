@@ -19,8 +19,12 @@ void main() {
     _stopEditWithName('toto');
   });
 
-  test('Test stop edit state with same name name', () {
+  test('Test stop edit state with same name', () {
     _stopEditWithName('name');
+  });
+
+  test('Test stop edit state with empty new name', () {
+    _stopEditWithNameAndExpectedName('', 'name');
   });
 
   test('Test get page title', () {
@@ -37,6 +41,10 @@ void main() {
 }
 
 void _stopEditWithName(String name) {
+  _stopEditWithNameAndExpectedName(name, name);
+}
+
+void _stopEditWithNameAndExpectedName(String name, String expectedName) {
   WorkoutDetailsState state = _createNewWorkoutState();
   state.editWorkout();
   var listenerNotified = false;
@@ -44,11 +52,10 @@ void _stopEditWithName(String name) {
 
   expect(state.isEditing, true);
 
-  final newName = name;
-  state.stopEditWorkout(newName);
+  state.stopEditWorkout(name);
   expect(state.isEditing, false);
   expect(listenerNotified, true);
-  expect(state.pageTitle, newName);
+  expect(state.pageTitle, expectedName);
 }
 
 WorkoutDetailsState _createNewWorkoutState() {

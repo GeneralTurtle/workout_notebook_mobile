@@ -28,7 +28,8 @@ class WorkoutDetailsState with ChangeNotifier {
 
   void _updateWorkoutName(String newTitle) {
     var isTitleDifferent = newTitle != pageTitle;
-    if(isTitleDifferent)
+    var isNewTitleNotEmpty = newTitle != '';
+    if(isTitleDifferent && isNewTitleNotEmpty)
       _workout = _workout.copyWith(name: newTitle);
   }
 }
