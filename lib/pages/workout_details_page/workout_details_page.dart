@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_notebook_mobile/pages/workout_details_page/add_exercise_sheet.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
@@ -19,19 +20,27 @@ class WorkoutDetailsPage extends StatelessWidget {
         body: Center(
           child: Text('${state.noExercisesDisplayMessage}'),
         ),
-        floatingActionButton: _floatingActionButton(state),
+        floatingActionButton: _floatingActionButton(context, state),
       ),
     );
   }
 
-  Widget _floatingActionButton(WorkoutDetailsState state) {
-    return state.isEditing ? _addExerciseButton() : _noButton();
+  Widget _floatingActionButton(
+      BuildContext context, WorkoutDetailsState state) {
+    return state.isEditing ? _addExerciseButton(context) : _noButton();
   }
 
-  FloatingActionButton _addExerciseButton() {
+  FloatingActionButton _addExerciseButton(BuildContext context) {
     return FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () {},
+      onPressed: () => _showAddExerciseBottomSheet(context),
+    );
+  }
+
+  void _showAddExerciseBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => AddExerciseSheet(),
     );
   }
 
