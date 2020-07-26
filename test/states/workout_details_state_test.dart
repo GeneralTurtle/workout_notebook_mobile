@@ -4,8 +4,7 @@ import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
 void main() {
   test('Test edit title state', () {
-    Workout workout = Workout('name', 'uuid');
-    WorkoutDetailsState state = WorkoutDetailsState(workout);
+    WorkoutDetailsState state = _createNewWorkoutState();
     var listenerNotified = false;
     state.addListener(() => listenerNotified = true);
 
@@ -22,4 +21,15 @@ void main() {
     WorkoutDetailsState state = WorkoutDetailsState(workout);
     expect(state.pageTitle, pageTitle);
   });
+
+  test('Test no exercises display', () {
+    WorkoutDetailsState state = _createNewWorkoutState();
+    expect(state.noExercisesDisplayMessage, 'No exercises to display ...');
+  });
+}
+
+WorkoutDetailsState _createNewWorkoutState() {
+  Workout workout = Workout('name', 'uuid');
+  WorkoutDetailsState state = WorkoutDetailsState(workout);
+  return state;
 }

@@ -11,6 +11,8 @@ class WorkoutDetailsState with ChangeNotifier {
 
   String get pageTitle => _workout.name;
 
+  String get noExercisesDisplayMessage => 'No exercises to display ...';
+
   void editTitle() {
     _isEditingTitle = true;
     notifyListeners();
