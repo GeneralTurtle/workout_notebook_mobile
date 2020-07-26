@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
+import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
 class WorkoutDetailsPage extends StatelessWidget {
   final TextEditingController titleController = TextEditingController();
@@ -8,13 +9,16 @@ class WorkoutDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<WorkoutDetailsState>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: _pageTitle(state),
-        actions: _actions(state),
-      ),
-      body: Center(
-        child: Text('${state.noExercisesDisplayMessage}'),
+    return WillPopScope(
+      onWillPop: () => _onBackPressed(context, state),
+      child: Scaffold(
+        appBar: AppBar(
+          title: _pageTitle(state),
+          actions: _actions(state),
+        ),
+        body: Center(
+          child: Text('${state.noExercisesDisplayMessage}'),
+        ),
       ),
     );
   }
@@ -62,5 +66,11 @@ class WorkoutDetailsPage extends StatelessWidget {
         },
       ),
     ];
+  }
+
+  Future<bool> _onBackPressed(BuildContext context, WorkoutDetailsState state) async {
+    final workoutsState = Provider.of<WorkoutsState>(context, listen: false);
+    workoutsState.updateWorkout(state.workout);
+    return true;
   }
 }

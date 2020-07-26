@@ -35,6 +35,19 @@ void main() {
     expect(state.hasWorkouts, false);
     expect(deleted, true);
   });
+
+  test('Test update workout', () {
+    WorkoutsState state = WorkoutsState();
+    state.newWorkout();
+
+    final initialWorkout = state.workouts[0];
+    final newWorkout = initialWorkout.copyWith(name: 'newName');
+    state.updateWorkout(newWorkout);
+
+    expect(state.workouts.length, 1);
+    expect(state.workouts[0].name, newWorkout.name);
+    expect(state.workouts[0].uuid, initialWorkout.uuid);
+  });
 }
 
 WorkoutsState _createNoEmptyState() {

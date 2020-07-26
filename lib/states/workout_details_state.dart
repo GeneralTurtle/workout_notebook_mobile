@@ -13,6 +13,8 @@ class WorkoutDetailsState with ChangeNotifier {
 
   String get noExercisesDisplayMessage => 'No exercises to display ...';
 
+  Workout get workout => _workout;
+
   void editWorkout() {
     _isEditing = true;
     notifyListeners();
