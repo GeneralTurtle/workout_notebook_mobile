@@ -3,18 +3,23 @@ import 'package:workout_notebook_mobile/models/workout.dart';
 
 class WorkoutDetailsState with ChangeNotifier {
   Workout _workout;
-  var _isEditingTitle = false;
+  var _isEditing = false;
 
   WorkoutDetailsState(this._workout);
 
-  bool get isEditingTitle => _isEditingTitle;
+  bool get isEditing => _isEditing;
 
   String get pageTitle => _workout.name;
 
   String get noExercisesDisplayMessage => 'No exercises to display ...';
 
-  void editTitle() {
-    _isEditingTitle = true;
+  void editWorkout() {
+    _isEditing = true;
+    notifyListeners();
+  }
+
+  void stopEditWorkout() {
+    _isEditing = false;
     notifyListeners();
   }
 }

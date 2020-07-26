@@ -3,15 +3,28 @@ import 'package:workout_notebook_mobile/models/workout.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
 void main() {
-  test('Test edit title state', () {
+  test('Test edit state', () {
     WorkoutDetailsState state = _createNewWorkoutState();
     var listenerNotified = false;
     state.addListener(() => listenerNotified = true);
 
-    expect(state.isEditingTitle, false);
+    expect(state.isEditing, false);
 
-    state.editTitle();
-    expect(state.isEditingTitle, true);
+    state.editWorkout();
+    expect(state.isEditing, true);
+    expect(listenerNotified, true);
+  });
+
+  test('Test stop edit state', () {
+    WorkoutDetailsState state = _createNewWorkoutState();
+    state.editWorkout();
+    var listenerNotified = false;
+    state.addListener(() => listenerNotified = true);
+
+    expect(state.isEditing, true);
+
+    state.stopEditWorkout();
+    expect(state.isEditing, false);
     expect(listenerNotified, true);
   });
 

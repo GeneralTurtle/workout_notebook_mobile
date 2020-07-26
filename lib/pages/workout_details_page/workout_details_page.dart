@@ -9,8 +9,33 @@ class WorkoutDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('${state.pageTitle}'),
+        actions: _actions(state),
       ),
-      body: Center(child: Text('${state.noExercisesDisplayMessage}'),),
+      body: Center(
+        child: Text('${state.noExercisesDisplayMessage}'),
+      ),
     );
+  }
+
+  List<Widget> _actions(WorkoutDetailsState state) {
+    return state.isEditing ? _editingModeActions(state) : _notEditingModeActions(state);
+  }
+
+  List<Widget> _notEditingModeActions(WorkoutDetailsState state) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(Icons.mode_edit),
+        onPressed: state.editWorkout,
+      ),
+    ];
+  }
+
+  List<Widget> _editingModeActions(WorkoutDetailsState state) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(Icons.check),
+        onPressed: state.stopEditWorkout,
+      ),
+    ];
   }
 }
