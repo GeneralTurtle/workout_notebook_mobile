@@ -8,7 +8,7 @@ class AddExerciseSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final workoutState = Provider.of<WorkoutDetailsState>(context);
+    final workoutState = Provider.of<WorkoutDetailsState>(context, listen: false);
     final exerciseState = Provider.of<ExerciseDetailsState>(context);
     return Column(
       children: <Widget>[
@@ -18,7 +18,7 @@ class AddExerciseSheet extends StatelessWidget {
         _restTime(exerciseState),
         FlatButton(
           onPressed: () => _addExercise(context, workoutState, exerciseState),
-          child: Text('ADD EXERCISE'),
+          child: Text('SAVE'),
         ),
       ],
     );

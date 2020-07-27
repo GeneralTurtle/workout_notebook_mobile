@@ -65,8 +65,15 @@ class WorkoutDetailsPage extends StatelessWidget {
     final exercise = state.newExercise();
     showModalBottomSheet(
       context: ctx,
-      builder: (context) => ChangeNotifierProvider<ExerciseDetailsState>(
-        create: (context) => ExerciseDetailsState(exercise),
+      builder: (context) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider<WorkoutDetailsState>.value(
+            value: state,
+          ),
+          ChangeNotifierProvider<ExerciseDetailsState>(
+            create: (context) => ExerciseDetailsState(exercise),
+          ),
+        ],
         child: AddExerciseSheet(),
       ),
     );
