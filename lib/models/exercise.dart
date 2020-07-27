@@ -14,4 +14,25 @@ class Exercise {
     @required this.numberOfSeries,
     @required this.restTimeInSeconds,
   });
+
+  Exercise copyWith({
+    uuid,
+    name,
+    numberOfRepetitions,
+    numberOfSeries,
+    restTimeInSeconds,
+  }) {
+    return Exercise(
+      uuid: uuid == null ? this.uuid : uuid,
+      name: name == null ? this.name : name,
+      numberOfRepetitions: numberOfRepetitions == null
+          ? this.numberOfRepetitions
+          : numberOfRepetitions,
+      numberOfSeries:
+          numberOfSeries == null ? this.numberOfSeries : numberOfSeries,
+      restTimeInSeconds: restTimeInSeconds == null
+          ? this.restTimeInSeconds
+          : restTimeInSeconds,
+    );
+  }
 }
