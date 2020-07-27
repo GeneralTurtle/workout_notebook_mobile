@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_notebook_mobile/models/exercise.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/add_exercise_sheet.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/exercise_list.dart';
 import 'package:workout_notebook_mobile/states/exercise_details_state.dart';
@@ -19,7 +20,9 @@ class WorkoutDetailsPage extends StatelessWidget {
           title: _pageTitle(state),
           actions: _actions(state),
         ),
-        body: ExerciseList(),
+        body: ExerciseList(
+          showBottomSheet: _showUpdateExerciseBottomSheet,
+        ),
         floatingActionButton: _floatingActionButton(context, state),
       ),
     );
@@ -34,15 +37,23 @@ class WorkoutDetailsPage extends StatelessWidget {
       BuildContext context, WorkoutDetailsState state) {
     return FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () => _showAddExerciseBottomSheet(context, state),
+      onPressed: () => _showNewExerciseBottomSheet(context, state),
     );
   }
 
-  void _showAddExerciseBottomSheet(
+  void _showNewExerciseBottomSheet(
     BuildContext ctx,
     WorkoutDetailsState state,
   ) {
     final exercise = state.newExercise();
+    _showUpdateExerciseBottomSheet(ctx, state, exercise);
+  }
+
+  void _showUpdateExerciseBottomSheet(
+    BuildContext ctx,
+    WorkoutDetailsState state,
+    Exercise exercise,
+  ) {
     showModalBottomSheet(
       context: ctx,
       builder: (context) => MultiProvider(
