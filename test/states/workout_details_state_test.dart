@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:workout_notebook_mobile/models/exercise.dart';
 import 'package:workout_notebook_mobile/models/workout.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
@@ -34,26 +35,41 @@ void main() {
     expect(state.pageTitle, pageTitle);
   });
 
-  test('Test add exercise', () {
+  test('Test no exercises display', () {
     WorkoutDetailsState state = _createNewWorkoutState();
     expect(state.noExercisesDisplayMessage, 'No exercises to display ...');
   });
 
-  test('Test no exercises display', () {
+  test('Test new exercise', () {
     WorkoutDetailsState state = _createNewWorkoutState();
     var listenerNotified = false;
     state.addListener(() => listenerNotified = true);
     expect(state.exercises.length, 0);
 
-    state.addExercise(
-      name: 'exercise_name',
-      numberOfReps: 8,
-      numberOfSeries: 4,
-      restTime: 90,
-    );
+    var exercise = state.newExercise();
 
     expect(state.exercises.length, 1);
-    expect(state.exercises[0].name, 'exercise_name');
+    expect(state.exercises[0], exercise);
+    expect(listenerNotified, true);
+  });
+
+  test('Test add exercise', () {
+    WorkoutDetailsState state = _createNewWorkoutState();
+    var listenerNotified = false;
+    state.addListener(() => listenerNotified = true);
+    expect(state.exercises.length, 0);
+
+    Exercise exercise = Exercise(
+      uuid: 'uuid',
+      name: 'name',
+      numberOfRepetitions: 10,
+      numberOfSeries: 4,
+      restTimeInSeconds: 90,
+    );
+    state.addExercise(exercise);
+
+    expect(state.exercises.length, 1);
+    expect(state.exercises[0], exercise);
     expect(listenerNotified, true);
   });
 }

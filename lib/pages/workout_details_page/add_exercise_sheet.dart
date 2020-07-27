@@ -1,93 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_notebook_mobile/states/exercise_details_state.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
-class AddExerciseSheet extends StatefulWidget {
-  @override
-  _AddExerciseSheetState createState() => _AddExerciseSheetState();
-}
-
-class _AddExerciseSheetState extends State<AddExerciseSheet> {
-  TextEditingController nameController = TextEditingController();
-  String name = 'New exercise';
-  int numberOfRepetitions = 10;
-  int numberOfSeries = 4;
-  int restTimeInSeconds = 90;
+class AddExerciseSheet extends StatelessWidget {
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<WorkoutDetailsState>(context);
+    final workoutState = Provider.of<WorkoutDetailsState>(context);
+    final exerciseState = Provider.of<ExerciseDetailsState>(context);
     return Column(
       children: <Widget>[
         _exerciseName(),
-        _numberOfSeries(),
-        _numberOfRepetitions(),
-        _restTime(),
+        _numberOfSeries(exerciseState),
+        _numberOfRepetitions(exerciseState),
+        _restTime(exerciseState),
         FlatButton(
-          onPressed: () => _addExercise(state),
+          onPressed: () => _addExercise(context, workoutState, exerciseState),
           child: Text('ADD EXERCISE'),
         ),
       ],
     );
   }
 
-  void _addExercise(WorkoutDetailsState state) {
-    name = nameController.text;
-    state.addExercise(
-      name: name,
-      numberOfSeries: numberOfSeries,
-      numberOfReps: numberOfRepetitions,
-      restTime: restTimeInSeconds,
-    );
+  void _addExercise(
+    BuildContext context,
+    WorkoutDetailsState workoutState,
+    ExerciseDetailsState exerciseState,
+  ) {
+    exerciseState.updateName(nameController.text);
+    workoutState.addExercise(exerciseState.exercise);
     Navigator.of(context).pop();
   }
 
   Widget _incrementDecrementValue(
-      Function minusValue, Function addValue, Widget displayText) {
+    Function minusValue,
+    Function addValue,
+    Widget displayText,
+  ) {
     return Row(
       children: <Widget>[
         IconButton(
           icon: Icon(Icons.remove),
-          onPressed: () {
-            setState(() {
-              minusValue();
-            });
-          },
+          onPressed: minusValue,
         ),
         displayText,
         IconButton(
           icon: Icon(Icons.add),
-          onPressed: () {
-            setState(() {
-              addValue();
-            });
-          },
+          onPressed: addValue,
         ),
       ],
     );
   }
 
-  Widget _restTime() {
+  Widget _restTime(ExerciseDetailsState exerciseState) {
     return _incrementDecrementValue(
-      () => restTimeInSeconds -= 30,
-      () => restTimeInSeconds += 30,
-      Text('$restTimeInSeconds sec'),
+      exerciseState.decrementRestTime,
+      exerciseState.incrementRestTime,
+      Text('${exerciseState.exercise.restTimeInSeconds} sec'),
     );
   }
 
-  Widget _numberOfRepetitions() {
+  Widget _numberOfRepetitions(ExerciseDetailsState exerciseState) {
     return _incrementDecrementValue(
-      () => numberOfRepetitions -= 1,
-      () => numberOfRepetitions += 1,
-      Text('$numberOfRepetitions reps'),
+      exerciseState.decrementNumberOfRepetitions,
+      exerciseState.incrementNumberOfRepetitions,
+      Text('${exerciseState.exercise.numberOfRepetitions} reps'),
     );
   }
 
-  Widget _numberOfSeries() {
+  Widget _numberOfSeries(ExerciseDetailsState exerciseState) {
     return _incrementDecrementValue(
-      () => numberOfSeries -= 1,
-      () => numberOfSeries += 1,
-      Text('$numberOfSeries series'),
+      exerciseState.decrementNumberOfSeries,
+      exerciseState.incrementNumberOfSeries,
+      Text('${exerciseState.exercise.numberOfSeries} series'),
     );
   }
 

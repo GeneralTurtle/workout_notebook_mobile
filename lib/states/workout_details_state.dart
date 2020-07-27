@@ -39,24 +39,7 @@ class WorkoutDetailsState with ChangeNotifier {
       _workout = _workout.copyWith(name: newTitle);
   }
 
-  void addExercise({
-    @required String name,
-    @required int numberOfSeries,
-    @required int numberOfReps,
-    @required int restTime,
-  }) {
-    Uuid uuid = Uuid();
-    Exercise exercise = Exercise(
-      name: name,
-      uuid: uuid.newUuid(),
-      numberOfRepetitions: numberOfReps,
-      numberOfSeries: numberOfSeries,
-      restTimeInSeconds: restTime,
-    );
-    _addExercise(exercise);
-  }
-
-  void _addExercise(Exercise exercise) {
+  void addExercise(Exercise exercise) {
     _workout = _workout.addExercise(exercise);
     notifyListeners();
   }
@@ -70,8 +53,7 @@ class WorkoutDetailsState with ChangeNotifier {
       numberOfSeries: 4,
       restTimeInSeconds: 90,
     );
-    _addExercise(exercise);
-    notifyListeners();
+    addExercise(exercise);
     return exercise;
   }
 }
