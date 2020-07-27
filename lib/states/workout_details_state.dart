@@ -60,4 +60,18 @@ class WorkoutDetailsState with ChangeNotifier {
     _workout = _workout.addExercise(exercise);
     notifyListeners();
   }
+
+  Exercise newExercise() {
+    Uuid uuid = Uuid();
+    Exercise exercise = Exercise(
+      uuid: uuid.newUuid(),
+      name: 'New Exercise',
+      numberOfRepetitions: 10,
+      numberOfSeries: 4,
+      restTimeInSeconds: 90,
+    );
+    _addExercise(exercise);
+    notifyListeners();
+    return exercise;
+  }
 }

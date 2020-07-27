@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/add_exercise_sheet.dart';
+import 'package:workout_notebook_mobile/states/exercise_details_state.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
@@ -58,11 +59,14 @@ class WorkoutDetailsPage extends StatelessWidget {
   }
 
   void _showAddExerciseBottomSheet(
-      BuildContext ctx, WorkoutDetailsState state) {
+    BuildContext ctx,
+    WorkoutDetailsState state,
+  ) {
+    final exercise = state.newExercise();
     showModalBottomSheet(
       context: ctx,
-      builder: (context) => ChangeNotifierProvider.value(
-        value: state,
+      builder: (context) => ChangeNotifierProvider<ExerciseDetailsState>(
+        create: (context) => ExerciseDetailsState(exercise),
         child: AddExerciseSheet(),
       ),
     );
