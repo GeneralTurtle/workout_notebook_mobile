@@ -20,8 +20,22 @@ class ExerciseList extends StatelessWidget {
   Widget _buildExerciseList(WorkoutDetailsState state) {
     return ListView.builder(
       itemCount: state.exercises.length,
-      itemBuilder: (context, index) => Card(
-        child: Text('${state.exercises[index].name}'),
+      itemBuilder: (context, index) => _buildListItem(state, index),
+    );
+  }
+
+  Widget _buildListItem(WorkoutDetailsState state, int index) {
+    final exercise = state.exercises[index];
+    return Card(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text('${exercise.name}'),
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () => state.deleteExercise(exercise),
+          ),
+        ],
       ),
     );
   }

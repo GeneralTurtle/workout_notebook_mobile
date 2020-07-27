@@ -62,4 +62,9 @@ class WorkoutDetailsState with ChangeNotifier {
     exercises.replaceRange(index, index + 1, [exercise]);
     notifyListeners();
   }
+
+  void deleteExercise(Exercise exercise) {
+    exercises.remove(exercise);
+    notifyListeners();
+  }
 }

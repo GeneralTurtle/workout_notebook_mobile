@@ -68,6 +68,20 @@ void main() {
     expect(state.exercises[0].name, newName);
     expect(listenerNotified, true);
   });
+
+  test('Test update exercise', () {
+    WorkoutDetailsState state = _createNewWorkoutState();
+    state.newExercise();
+    expect(state.exercises.length, 1);
+
+    var listenerNotified = false;
+    state.addListener(() => listenerNotified = true);
+
+    final exercise = state.exercises[0];
+    state.deleteExercise(exercise);
+    expect(state.exercises.length, 0);
+    expect(listenerNotified, true);
+  });
 }
 
 void _stopEditWithName(String name) {
