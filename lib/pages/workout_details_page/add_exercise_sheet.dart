@@ -8,11 +8,12 @@ class AddExerciseSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final workoutState = Provider.of<WorkoutDetailsState>(context, listen: false);
+    final workoutState =
+        Provider.of<WorkoutDetailsState>(context, listen: false);
     final exerciseState = Provider.of<ExerciseDetailsState>(context);
     return Column(
       children: <Widget>[
-        _exerciseName(),
+        _exerciseName(exerciseState),
         _numberOfSeries(exerciseState),
         _numberOfRepetitions(exerciseState),
         _restTime(exerciseState),
@@ -29,8 +30,7 @@ class AddExerciseSheet extends StatelessWidget {
     WorkoutDetailsState workoutState,
     ExerciseDetailsState exerciseState,
   ) {
-    exerciseState.updateName(nameController.text);
-    workoutState.addExercise(exerciseState.exercise);
+    workoutState.updateExercise(exerciseState.exercise);
     Navigator.of(context).pop();
   }
 
@@ -78,9 +78,13 @@ class AddExerciseSheet extends StatelessWidget {
     );
   }
 
-  Widget _exerciseName() {
+  Widget _exerciseName(ExerciseDetailsState exerciseState) {
     return TextField(
       controller: nameController,
+      onSubmitted: (value) => exerciseState.updateName(value),
+      decoration: InputDecoration(
+        hintText: exerciseState.exercise.name,
+      ),
     );
   }
 }

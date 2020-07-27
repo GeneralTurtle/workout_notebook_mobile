@@ -53,23 +53,19 @@ void main() {
     expect(listenerNotified, true);
   });
 
-  test('Test add exercise', () {
+  test('Test update exercise', () {
     WorkoutDetailsState state = _createNewWorkoutState();
+    state.newExercise();
     var listenerNotified = false;
     state.addListener(() => listenerNotified = true);
-    expect(state.exercises.length, 0);
+    expect(state.exercises.length, 1);
 
-    Exercise exercise = Exercise(
-      uuid: 'uuid',
-      name: 'name',
-      numberOfRepetitions: 10,
-      numberOfSeries: 4,
-      restTimeInSeconds: 90,
-    );
-    state.addExercise(exercise);
+    String newName = 'newName';
+    Exercise exercise = state.exercises[0].copyWith(name: newName);
+    state.updateExercise(exercise);
 
     expect(state.exercises.length, 1);
-    expect(state.exercises[0], exercise);
+    expect(state.exercises[0].name, newName);
     expect(listenerNotified, true);
   });
 }
