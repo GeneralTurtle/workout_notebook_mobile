@@ -19,6 +19,8 @@ class WorkoutDetailsState with ChangeNotifier {
 
   List<Exercise> get exercises => _workout.exercises;
 
+  bool get hasExercises => _workout.exercises.isNotEmpty;
+
   void editWorkout() {
     _isEditing = true;
     notifyListeners();

@@ -8,6 +8,7 @@ class AddExerciseSheet extends StatefulWidget {
 }
 
 class _AddExerciseSheetState extends State<AddExerciseSheet> {
+  TextEditingController nameController = TextEditingController();
   String name = 'New exercise';
   int numberOfRepetitions = 10;
   int numberOfSeries = 4;
@@ -31,6 +32,7 @@ class _AddExerciseSheetState extends State<AddExerciseSheet> {
   }
 
   void _addExercise(WorkoutDetailsState state) {
+    name = nameController.text;
     state.addExercise(
       name: name,
       numberOfSeries: numberOfSeries,
@@ -90,6 +92,8 @@ class _AddExerciseSheetState extends State<AddExerciseSheet> {
   }
 
   Widget _exerciseName() {
-    return TextField();
+    return TextField(
+      controller: nameController,
+    );
   }
 }

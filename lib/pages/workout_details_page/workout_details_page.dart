@@ -17,10 +17,29 @@ class WorkoutDetailsPage extends StatelessWidget {
           title: _pageTitle(state),
           actions: _actions(state),
         ),
-        body: Center(
-          child: Text('${state.noExercisesDisplayMessage}'),
-        ),
+        body: _pageContent(state),
         floatingActionButton: _floatingActionButton(context, state),
+      ),
+    );
+  }
+
+  Widget _pageContent(WorkoutDetailsState state) {
+    return state.hasExercises
+        ? _buildExerciseList(state)
+        : _defaultDisplay(state);
+  }
+
+  Widget _defaultDisplay(WorkoutDetailsState state) {
+    return Center(
+      child: Text('${state.noExercisesDisplayMessage}'),
+    );
+  }
+
+  Widget _buildExerciseList(WorkoutDetailsState state) {
+    return ListView.builder(
+      itemCount: state.exercises.length,
+      itemBuilder: (context, index) => Card(
+        child: Text('${state.exercises[index].name}'),
       ),
     );
   }
