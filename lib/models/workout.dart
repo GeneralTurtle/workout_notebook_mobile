@@ -1,17 +1,27 @@
+import 'package:flutter/foundation.dart';
+import 'package:workout_notebook_mobile/models/exercise.dart';
+
 class Workout {
-  final String _name;
-  final String _uuid;
+  final String name;
+  final String uuid;
+  final List<Exercise> exercises;
 
-  Workout(this._name, this._uuid);
+  Workout({
+    @required this.name,
+    @required this.uuid,
+    this.exercises = const [],
+  });
 
-  String get name => _name;
-
-  String get uuid => _uuid;
-
-  Workout copyWith({String name, String uuid}) {
+  Workout copyWith({String name, String uuid, List<Exercise> exercises}) {
     return Workout(
-      name == null? _name: name,
-      uuid == null? _uuid: uuid
+      name: name == null ? this.name : name,
+      uuid: uuid == null ? this.uuid : uuid,
+      exercises: exercises == null ? this.exercises : exercises,
     );
+  }
+
+  Workout addExercise(Exercise exercise) {
+    List<Exercise> newList = [...exercises, exercise];
+    return copyWith(exercises: newList);
   }
 }
