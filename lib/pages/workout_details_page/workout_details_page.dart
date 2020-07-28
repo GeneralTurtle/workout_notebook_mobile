@@ -118,7 +118,9 @@ class WorkoutDetailsPage extends StatelessWidget {
   }
 
   Future<bool> _onBackPressed(
-      BuildContext context, WorkoutDetailsState state) async {
+    BuildContext context,
+    WorkoutDetailsState state,
+  ) async {
     final workoutsState = Provider.of<WorkoutsState>(context, listen: false);
     workoutsState.updateWorkout(state.workout);
     return true;
