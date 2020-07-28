@@ -20,7 +20,10 @@ class PagesNavigator {
   void toPlayWorkoutPage(BuildContext context, Workout workout) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PlayWorkoutPage(),
+        builder: (context) => ChangeNotifierProvider<WorkoutDetailsState>(
+          create: (context) => WorkoutDetailsState(workout),
+          child: PlayWorkoutPage(),
+        ),
       ),
     );
   }
