@@ -5,10 +5,10 @@ import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
 class WorkoutFloatingButton extends StatelessWidget {
   final Function(
-      BuildContext ctx,
-      WorkoutDetailsState state,
-      Exercise exercise,
-      ) showBottomSheet;
+    BuildContext ctx,
+    WorkoutDetailsState state,
+    Exercise exercise,
+  ) showBottomSheet;
 
   WorkoutFloatingButton(this.showBottomSheet);
 
@@ -21,7 +21,9 @@ class WorkoutFloatingButton extends StatelessWidget {
   }
 
   Widget _addExerciseButton(
-      BuildContext context, WorkoutDetailsState state) {
+    BuildContext context,
+    WorkoutDetailsState state,
+  ) {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () => _showNewExerciseBottomSheet(context, state),
@@ -36,9 +38,9 @@ class WorkoutFloatingButton extends StatelessWidget {
   }
 
   void _showNewExerciseBottomSheet(
-      BuildContext ctx,
-      WorkoutDetailsState state,
-      ) {
+    BuildContext ctx,
+    WorkoutDetailsState state,
+  ) {
     final exercise = state.newExercise();
     showBottomSheet(ctx, state, exercise);
   }
