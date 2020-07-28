@@ -30,7 +30,9 @@ class WorkoutDetailsPage extends StatelessWidget {
 
   Widget _floatingActionButton(
       BuildContext context, WorkoutDetailsState state) {
-    return state.isEditing ? _addExerciseButton(context, state) : _noButton();
+    return state.isEditing
+        ? _addExerciseButton(context, state)
+        : _playWorkout();
   }
 
   FloatingActionButton _addExerciseButton(
@@ -70,7 +72,12 @@ class WorkoutDetailsPage extends StatelessWidget {
     );
   }
 
-  SizedBox _noButton() => SizedBox.shrink();
+  Widget _playWorkout() {
+    return FloatingActionButton(
+      child: Icon(Icons.play_arrow),
+      onPressed: () {},
+    );
+  }
 
   Widget _pageTitle(WorkoutDetailsState state) {
     return state.isEditing ? _editTitle(state) : _displayTitle(state);
