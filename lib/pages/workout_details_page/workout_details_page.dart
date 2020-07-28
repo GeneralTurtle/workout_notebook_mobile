@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/models/exercise.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/add_exercise_sheet.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/exercise_list.dart';
+import 'package:workout_notebook_mobile/pages/workout_details_page/workout_floating_button.dart';
 import 'package:workout_notebook_mobile/states/exercise_details_state.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
@@ -23,30 +24,9 @@ class WorkoutDetailsPage extends StatelessWidget {
         body: ExerciseList(
           showBottomSheet: _showUpdateExerciseBottomSheet,
         ),
-        floatingActionButton: _floatingActionButton(context, state),
+        floatingActionButton: WorkoutFloatingButton(_showUpdateExerciseBottomSheet),
       ),
     );
-  }
-
-  Widget _floatingActionButton(
-      BuildContext context, WorkoutDetailsState state) {
-    return state.isEditing ? _addExerciseButton(context, state) : _noButton();
-  }
-
-  FloatingActionButton _addExerciseButton(
-      BuildContext context, WorkoutDetailsState state) {
-    return FloatingActionButton(
-      child: Icon(Icons.add),
-      onPressed: () => _showNewExerciseBottomSheet(context, state),
-    );
-  }
-
-  void _showNewExerciseBottomSheet(
-    BuildContext ctx,
-    WorkoutDetailsState state,
-  ) {
-    final exercise = state.newExercise();
-    _showUpdateExerciseBottomSheet(ctx, state, exercise);
   }
 
   void _showUpdateExerciseBottomSheet(
@@ -69,8 +49,6 @@ class WorkoutDetailsPage extends StatelessWidget {
       ),
     );
   }
-
-  SizedBox _noButton() => SizedBox.shrink();
 
   Widget _pageTitle(WorkoutDetailsState state) {
     return state.isEditing ? _editTitle(state) : _displayTitle(state);
@@ -118,7 +96,9 @@ class WorkoutDetailsPage extends StatelessWidget {
   }
 
   Future<bool> _onBackPressed(
-      BuildContext context, WorkoutDetailsState state) async {
+    BuildContext context,
+    WorkoutDetailsState state,
+  ) async {
     final workoutsState = Provider.of<WorkoutsState>(context, listen: false);
     workoutsState.updateWorkout(state.workout);
     return true;
