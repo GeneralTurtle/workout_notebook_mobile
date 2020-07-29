@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/exercise.dart';
+import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
 import 'package:workout_notebook_mobile/states/exercise_details_state.dart';
 
 void main() {

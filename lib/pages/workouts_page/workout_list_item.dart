@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/workout.dart';
+import 'package:workout_notebook_mobile/models/workouts/workout.dart';
 import 'package:workout_notebook_mobile/pages/navigators/pages_navigator.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 

@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/exercise.dart';
-import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/workout.dart';
+import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
+import 'package:workout_notebook_mobile/models/workouts/workout.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/exercise.dart';
+import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/add_exercise_sheet.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/exercise_list.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/workout_floating_button.dart';
