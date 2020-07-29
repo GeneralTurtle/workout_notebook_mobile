@@ -1,7 +1,41 @@
 import 'package:test/test.dart';
+import 'package:workout_notebook_mobile/models/exercise.dart';
+import 'package:workout_notebook_mobile/models/records/exercise_record.dart';
+import 'package:workout_notebook_mobile/models/records/workout_record.dart';
+import 'package:workout_notebook_mobile/models/records_factory/workout_record_factory.dart';
+import 'package:workout_notebook_mobile/models/workout.dart';
+import 'package:workout_notebook_mobile/states/workout_record_state.dart';
 
 void main() {
-  test('Test page title', () {
-
+  test('Test no exercises to record display message', () {
+    WorkoutRecordState state = _createWorkoutRecordState();
+    expect(state.noExerciseDisplayMessage, 'There are no exercises to display...');
   });
+
+  test('Test get exercise records', () {
+    WorkoutRecordState state = _createWorkoutRecordState();
+
+    List<ExerciseRecord> exerciseRecords = state.exerciseRecords;
+    expect(exerciseRecords.length, 1);
+  });
+}
+
+WorkoutRecordState _createWorkoutRecordState() {
+  Exercise exercise = Exercise(
+    uuid: 'uuid',
+    name: 'name',
+    numberOfRepetitions: 10,
+    numberOfSets: 4,
+    restTimeInSeconds: 90,
+  );
+  Workout workout = Workout(
+      name: 'name',
+      uuid: 'uuid',
+      exercises: [exercise]
+  );
+
+  final WorkoutRecordFactory factory = WorkoutRecordFactory();
+  WorkoutRecord workoutRecord  = factory.emptyRecordFromWorkout(workout);
+  WorkoutRecordState state = WorkoutRecordState(workoutRecord);
+  return state;
 }

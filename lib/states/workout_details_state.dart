@@ -50,7 +50,7 @@ class WorkoutDetailsState with ChangeNotifier {
       uuid: uuid.newUuid(),
       name: 'New Exercise',
       numberOfRepetitions: 10,
-      numberOfSeries: 4,
+      numberOfSets: 4,
       restTimeInSeconds: 90,
     );
     _addExercise(exercise);

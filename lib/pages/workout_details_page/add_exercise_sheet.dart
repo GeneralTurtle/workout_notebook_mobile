@@ -74,7 +74,7 @@ class AddExerciseSheet extends StatelessWidget {
     return _incrementDecrementValue(
       exerciseState.decrementNumberOfSeries,
       exerciseState.incrementNumberOfSeries,
-      Text('${exerciseState.exercise.numberOfSeries} series'),
+      Text('${exerciseState.exercise.numberOfSets} series'),
     );
   }
 

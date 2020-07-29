@@ -4,14 +4,14 @@ class Exercise {
   final String uuid;
   final String name;
   final int numberOfRepetitions;
-  final int numberOfSeries;
+  final int numberOfSets;
   final int restTimeInSeconds;
 
   Exercise({
     @required this.uuid,
     @required this.name,
     @required this.numberOfRepetitions,
-    @required this.numberOfSeries,
+    @required this.numberOfSets,
     @required this.restTimeInSeconds,
   });
 
@@ -19,7 +19,7 @@ class Exercise {
     uuid,
     name,
     numberOfRepetitions,
-    numberOfSeries,
+    numberOfSet,
     restTimeInSeconds,
   }) {
     return Exercise(
@@ -28,8 +28,8 @@ class Exercise {
       numberOfRepetitions: numberOfRepetitions == null
           ? this.numberOfRepetitions
           : numberOfRepetitions,
-      numberOfSeries:
-          numberOfSeries == null ? this.numberOfSeries : numberOfSeries,
+      numberOfSets:
+          numberOfSet == null ? this.numberOfSets : numberOfSet,
       restTimeInSeconds: restTimeInSeconds == null
           ? this.restTimeInSeconds
           : restTimeInSeconds,

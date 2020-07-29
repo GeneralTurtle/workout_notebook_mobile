@@ -42,7 +42,7 @@ class WorkoutRecordPage extends StatelessWidget {
         ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: exercise.numberOfSeries,
+          itemCount: exercise.numberOfSets,
           itemBuilder: (context, index) =>
               _recordLine(index + 1, exercise.numberOfRepetitions),
         ),

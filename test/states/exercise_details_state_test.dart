@@ -22,7 +22,7 @@ void main() {
     state.addListener(() => listenerNotified = true);
 
     state.incrementNumberOfSeries();
-    expect(state.exercise.numberOfSeries, exercise.numberOfSeries + 1);
+    expect(state.exercise.numberOfSets, exercise.numberOfSets + 1);
     expect(listenerNotified, true);
   });
 
@@ -33,7 +33,7 @@ void main() {
     state.addListener(() => listenerNotified = true);
 
     state.decrementNumberOfSeries();
-    expect(state.exercise.numberOfSeries, exercise.numberOfSeries - 1);
+    expect(state.exercise.numberOfSets, exercise.numberOfSets - 1);
     expect(listenerNotified, true);
   });
 
@@ -87,7 +87,7 @@ Exercise _defaultExercise() {
   uuid: 'uuid',
   name: 'name',
   numberOfRepetitions: 10,
-  numberOfSeries: 4,
+  numberOfSets: 4,
   restTimeInSeconds: 90,
   );
 }
