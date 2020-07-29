@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/models/exercise.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
-class PlayWorkoutPage extends StatelessWidget {
+class WorkoutRecordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<WorkoutDetailsState>(context, listen: false);

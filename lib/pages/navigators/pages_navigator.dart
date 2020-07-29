@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/models/workout.dart';
-import 'package:workout_notebook_mobile/pages/play_workout_page/play_workout_page.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/workout_details_page.dart';
+import 'package:workout_notebook_mobile/pages/workout_record_page/workout_record_page.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
 class PagesNavigator {
@@ -22,7 +22,7 @@ class PagesNavigator {
       MaterialPageRoute(
         builder: (context) => ChangeNotifierProvider<WorkoutDetailsState>(
           create: (context) => WorkoutDetailsState(workout),
-          child: PlayWorkoutPage(),
+          child: WorkoutRecordPage(),
         ),
       ),
     );
