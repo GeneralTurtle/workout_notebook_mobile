@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_notebook_mobile/models/exercise.dart';
-import 'package:workout_notebook_mobile/models/workout.dart';
+import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/exercise.dart';
+import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/workout.dart';
 import 'package:workout_notebook_mobile/uuid_lib/uuid.dart';
 
 class WorkoutDetailsState with ChangeNotifier {

@@ -1,4 +1,4 @@
-import 'package:workout_notebook_mobile/models/workout.dart';
+import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/workout.dart';
 
 class WorkoutRepository {
   List<Workout> fetchWorkouts() {

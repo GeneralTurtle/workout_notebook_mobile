@@ -1,8 +1,8 @@
-import 'package:workout_notebook_mobile/models/exercise.dart';
+import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/exercise.dart';
 import 'package:workout_notebook_mobile/models/records/exercise_record.dart';
 import 'package:workout_notebook_mobile/models/records/set_record.dart';
 import 'package:workout_notebook_mobile/models/records/workout_record.dart';
-import 'package:workout_notebook_mobile/models/workout.dart';
+import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/workout.dart';
 import 'package:workout_notebook_mobile/uuid_lib/uuid.dart';
 
 class WorkoutRecordFactory {

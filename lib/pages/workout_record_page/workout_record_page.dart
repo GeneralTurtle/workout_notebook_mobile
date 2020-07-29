@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_notebook_mobile/models/exercise.dart';
+import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/exercise.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
 
 class WorkoutRecordPage extends StatelessWidget {

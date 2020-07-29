@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:workout_notebook_mobile/models/exercise.dart';
+import 'file:///C:/Dev/workout_notebook_mobile/lib/models/workouts/exercise.dart';
 
 class ExerciseDetailsState with ChangeNotifier {
   Exercise _exercise;
