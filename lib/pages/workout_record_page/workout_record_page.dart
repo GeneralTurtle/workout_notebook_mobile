@@ -1,60 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
-import 'package:workout_notebook_mobile/states/workout_details_state.dart';
+import 'package:workout_notebook_mobile/models/records/exercise_record.dart';
+import 'package:workout_notebook_mobile/models/records/set_record.dart';
+import 'package:workout_notebook_mobile/states/workout_record_state.dart';
 
 class WorkoutRecordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<WorkoutDetailsState>(context, listen: false);
+    final state = Provider.of<WorkoutRecordState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Play: ${state.pageTitle}'),
+        title: Text('Record: ${state.workoutName}'),
       ),
       body: _pageBody(state),
     );
   }
 
-  Widget _pageBody(WorkoutDetailsState state) {
-    return state.hasExercises
+  Widget _pageBody(WorkoutRecordState state) {
+    return state.hasExercisesRecords
         ? _exerciseRecordsList(state)
         : _defaultDisplay(state);
   }
 
-  Widget _defaultDisplay(WorkoutDetailsState state) {
+  Widget _defaultDisplay(WorkoutRecordState state) {
     return Center(
-      child: Text('${state.noExercisesDisplayMessage}'),
+      child: Text('${state.noExerciseDisplayMessage}'),
     );
   }
 
-  Widget _exerciseRecordsList(WorkoutDetailsState state) {
+  Widget _exerciseRecordsList(WorkoutRecordState state) {
     return ListView.builder(
-      itemCount: state.exercises.length,
+      itemCount: state.exerciseRecords.length,
       itemBuilder: (context, index) =>
-          _exerciseRecordItem(state.exercises[index]),
+          _exerciseRecordItem(state.exerciseRecords[index]),
     );
   }
 
-  Widget _exerciseRecordItem(Exercise exercise) {
+  Widget _exerciseRecordItem(ExerciseRecord exerciseRecord) {
     return Column(
       children: <Widget>[
-        Text('${exercise.name}'),
+        Text('${exerciseRecord.exerciseName}'),
         ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: exercise.numberOfSets,
+          itemCount: exerciseRecord.setRecords.length,
           itemBuilder: (context, index) =>
-              _recordLine(index + 1, exercise.numberOfRepetitions),
+              _recordLine(exerciseRecord.setRecords[index]),
         ),
         Divider(),
       ],
     );
   }
 
-  Widget _recordLine(int index, int numberOfRepetitions) {
+  Widget _recordLine(SetRecord setRecord) {
     return Row(
       children: <Widget>[
-        Text('Serie $index'),
+        Text('Set ${setRecord.index}'),
         SizedBox(width: 100, child: TextField()),
         Text('reps'),
         SizedBox(width: 100, child: TextField()),

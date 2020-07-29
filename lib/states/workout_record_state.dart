@@ -11,4 +11,8 @@ class WorkoutRecordState {
 
   List<ExerciseRecord> get exerciseRecords => _workoutRecord.exerciseRecords;
 
+  String get workoutName => _workoutRecord.workoutName;
+
+  bool get hasExercisesRecords => exerciseRecords.isNotEmpty;
+
 }

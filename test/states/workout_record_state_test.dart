@@ -12,6 +12,13 @@ void main() {
     expect(state.noExerciseDisplayMessage, 'There are no exercises to display...');
   });
 
+  test('Test get workout name', () {
+    WorkoutRecordState state = _createWorkoutRecordState();
+    expect(state.workoutName, 'workout_name');
+  });
+
+
+
   test('Test get exercise records', () {
     WorkoutRecordState state = _createWorkoutRecordState();
 
@@ -22,15 +29,15 @@ void main() {
 
 WorkoutRecordState _createWorkoutRecordState() {
   Exercise exercise = Exercise(
-    uuid: 'uuid',
-    name: 'name',
+    uuid: 'exercise_uuid',
+    name: 'exercise_name',
     numberOfRepetitions: 10,
     numberOfSets: 4,
     restTimeInSeconds: 90,
   );
   Workout workout = Workout(
-      name: 'name',
-      uuid: 'uuid',
+      name: 'workout_name',
+      uuid: 'workout_uuid',
       exercises: [exercise]
   );
 
