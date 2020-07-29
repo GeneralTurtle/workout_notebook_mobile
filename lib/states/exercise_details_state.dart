@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:workout_notebook_mobile/models/exercise.dart';
+import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
 
 class ExerciseDetailsState with ChangeNotifier {
   Exercise _exercise;
@@ -15,13 +15,13 @@ class ExerciseDetailsState with ChangeNotifier {
 
   void incrementNumberOfSeries() {
     _exercise = _exercise.copyWith(
-        numberOfSeries: _incrementByOne(_exercise.numberOfSeries));
+        numberOfSet: _incrementByOne(_exercise.numberOfSets));
     notifyListeners();
   }
 
   void decrementNumberOfSeries() {
     _exercise = _exercise.copyWith(
-        numberOfSeries: _decrementByOne(_exercise.numberOfSeries));
+        numberOfSet: _decrementByOne(_exercise.numberOfSets));
     notifyListeners();
   }
 

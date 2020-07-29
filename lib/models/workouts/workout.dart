@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:workout_notebook_mobile/models/exercise.dart';
+import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
 
 class Workout {
   final String name;
