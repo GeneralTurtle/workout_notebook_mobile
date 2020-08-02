@@ -2,28 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/models/records/exercise_record.dart';
 import 'package:workout_notebook_mobile/models/records/set_record.dart';
+import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
 import 'package:workout_notebook_mobile/states/workout_record_state.dart';
 
 class WorkoutRecordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<WorkoutRecordState>(context, listen: false);
+    final state = Provider.of<WorkoutRecordState>(context);
+    final recordRepository =
+        Provider.of<WorkoutRecordRepository>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Record: ${state.workoutName}'),
-        actions: _buildActions(),
+        actions: _buildActions(recordRepository, state),
       ),
       body: _pageBody(state),
     );
   }
 
-  List<Widget> _buildActions() {
+  List<Widget> _buildActions(
+      WorkoutRecordRepository recordRepository, WorkoutRecordState state) {
     return <Widget>[
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.save),
-        ),
-      ];
+      IconButton(
+        onPressed: () => recordRepository.saveRecord(state.workoutRecord),
+        icon: Icon(Icons.save),
+      ),
+    ];
   }
 
   Widget _pageBody(WorkoutRecordState state) {
@@ -42,11 +47,12 @@ class WorkoutRecordPage extends StatelessWidget {
     return ListView.builder(
       itemCount: state.exerciseRecords.length,
       itemBuilder: (context, index) =>
-          _exerciseRecordItem(state.exerciseRecords[index]),
+          _exerciseRecordItem(state.exerciseRecords[index], state),
     );
   }
 
-  Widget _exerciseRecordItem(ExerciseRecord exerciseRecord) {
+  Widget _exerciseRecordItem(
+      ExerciseRecord exerciseRecord, WorkoutRecordState state) {
     return Column(
       children: <Widget>[
         Text('${exerciseRecord.exerciseName}'),
@@ -54,21 +60,45 @@ class WorkoutRecordPage extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: exerciseRecord.setRecords.length,
-          itemBuilder: (context, index) =>
-              _recordLine(exerciseRecord.setRecords[index]),
+          itemBuilder: (context, index) => _recordLine(
+              exerciseRecord.setRecords[index], state, exerciseRecord),
         ),
         Divider(),
       ],
     );
   }
 
-  Widget _recordLine(SetRecord setRecord) {
+  Widget _recordLine(
+    SetRecord setRecord,
+    WorkoutRecordState state,
+    ExerciseRecord exerciseRecord,
+  ) {
     return Row(
       children: <Widget>[
-        Text('Set ${setRecord.index}'),
-        SizedBox(width: 100, child: TextField()),
-        Text('reps'),
-        SizedBox(width: 100, child: TextField()),
+        Text('Set ${setRecord.index}: '),
+        SizedBox(
+          width: 100,
+          child: TextField(
+            controller:
+                TextEditingController(text: '${setRecord.numberOfRepetitions}'),
+            onSubmitted: (value) => state.updateNumberOfRepetitions(
+              value,
+              exerciseRecord.uuid,
+              setRecord.uuid,
+            ),
+          ),
+        ),
+        Text('reps, '),
+        SizedBox(
+            width: 100,
+            child: TextField(
+              controller: TextEditingController(text: '${setRecord.weight}'),
+              onSubmitted: (value) => state.updateWeight(
+                value,
+                exerciseRecord.uuid,
+                setRecord.uuid,
+              ),
+            )),
         Text('kg'),
       ],
     );

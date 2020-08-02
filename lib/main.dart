@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/pages/navigators/pages_navigator.dart';
 import 'package:workout_notebook_mobile/pages/workouts_page/workouts_page.dart';
+import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
 import 'package:workout_notebook_mobile/states/workouts_state.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         Provider(
           create: (context) => PagesNavigator(),
         ),
+        Provider<WorkoutRecordRepository>(create: (context) => WorkoutRecordRepository(),),
         ChangeNotifierProvider<WorkoutsState>(
           create: (context) => WorkoutsState(),
         ),

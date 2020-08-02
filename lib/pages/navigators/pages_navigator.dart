@@ -24,7 +24,7 @@ class PagesNavigator {
     final record = factory.emptyRecordFromWorkout(workout);
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Provider<WorkoutRecordState>(
+        builder: (context) => ChangeNotifierProvider<WorkoutRecordState>(
           create: (context) => WorkoutRecordState(record),
           child: WorkoutRecordPage(),
         ),
