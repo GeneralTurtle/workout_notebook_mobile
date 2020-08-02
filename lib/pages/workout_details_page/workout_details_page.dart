@@ -81,6 +81,10 @@ class WorkoutDetailsPage extends StatelessWidget {
         icon: Icon(Icons.mode_edit),
         onPressed: state.editWorkout,
       ),
+      IconButton(
+        icon: Icon(Icons.folder),
+        onPressed: (){},
+      ),
     ];
   }
 
