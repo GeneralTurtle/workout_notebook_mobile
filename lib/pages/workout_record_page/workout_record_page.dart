@@ -11,9 +11,19 @@ class WorkoutRecordPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Record: ${state.workoutName}'),
+        actions: _buildActions(),
       ),
       body: _pageBody(state),
     );
+  }
+
+  List<Widget> _buildActions() {
+    return <Widget>[
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.save),
+        ),
+      ];
   }
 
   Widget _pageBody(WorkoutRecordState state) {
