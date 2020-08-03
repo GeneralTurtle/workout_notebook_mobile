@@ -24,7 +24,7 @@ class WorkoutRecordState with ChangeNotifier {
   }
 
   void updateWeight(String value, String exerciseRecordUuid, String setRecordUuid) {
-    _updateSetRecord(value, exerciseRecordUuid, setRecordUuid, (record) => record.copyWith(weight: int.parse(value)));
+    _updateSetRecord(value, exerciseRecordUuid, setRecordUuid, (record) => record.copyWith(weight: double.parse(value)));
   }
 
   void _updateSetRecord(String value, String exerciseRecordUuid, String setRecordUuid, SetRecord Function(SetRecord) changeSetRecord) {

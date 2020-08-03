@@ -36,7 +36,7 @@ class WorkoutFloatingButton extends StatelessWidget {
       child: Icon(Icons.play_arrow),
       onPressed: () {
         final navigator = Provider.of<PagesNavigator>(context, listen: false);
-        navigator.toPlayWorkoutPage(context, state.workout);
+        navigator.toWorkoutRecordPageNew(context, state.workout);
       },
     );
   }

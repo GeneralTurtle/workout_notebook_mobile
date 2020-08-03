@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_notebook_mobile/models/records/workout_record.dart';
 import 'package:workout_notebook_mobile/models/records_factory/workout_record_factory.dart';
 import 'package:workout_notebook_mobile/models/workouts/workout.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/workout_details_page.dart';
@@ -20,9 +21,13 @@ class PagesNavigator {
     );
   }
 
-  void toPlayWorkoutPage(BuildContext context, Workout workout) {
+  void toWorkoutRecordPageNew(BuildContext context, Workout workout) {
     final factory = WorkoutRecordFactory();
     final record = factory.emptyRecordFromWorkout(workout);
+    _toWorkoutRecordPage(context, record);
+  }
+
+  void _toWorkoutRecordPage(BuildContext context, WorkoutRecord record) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => ChangeNotifierProvider<WorkoutRecordState>(
@@ -31,6 +36,10 @@ class PagesNavigator {
         ),
       ),
     );
+  }
+
+  void toWorkoutRecordPageEdition(BuildContext context, WorkoutRecord record) {
+    _toWorkoutRecordPage(context, record);
   }
 
   void toWorkoutRecordListPage(BuildContext context, Workout workout) {

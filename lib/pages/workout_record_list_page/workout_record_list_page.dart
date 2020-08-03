@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_notebook_mobile/pages/navigators/pages_navigator.dart';
 import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
 
 class WorkoutRecordListPage extends StatelessWidget {
@@ -24,8 +25,14 @@ class WorkoutRecordListPage extends StatelessWidget {
     return ListView.builder(
           itemCount: recordRepository.workoutRecords.length,
           itemBuilder: (context, index) {
-            return Card(
-              child: Text('${recordRepository.workoutRecords[index].uuid}'),
+            return GestureDetector(
+              onTap: () {
+                final navigator = Provider.of<PagesNavigator>(context, listen: false);
+                navigator.toWorkoutRecordPageEdition(context, recordRepository.workoutRecords[index]);
+              },
+              child: Card(
+                child: Text('${recordRepository.workoutRecords[index].uuid}'),
+              ),
             );
           },
         );
