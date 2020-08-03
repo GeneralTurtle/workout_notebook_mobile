@@ -74,6 +74,7 @@ class WorkoutRecordPage extends StatelessWidget {
     ExerciseRecord exerciseRecord,
   ) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text('Set ${setRecord.index}: '),
         SizedBox(
