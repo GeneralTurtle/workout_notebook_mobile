@@ -2,14 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:workout_notebook_mobile/models/records/exercise_record.dart';
 import 'package:workout_notebook_mobile/models/records/set_record.dart';
 import 'package:workout_notebook_mobile/models/records/workout_record.dart';
+import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
 
 class WorkoutRecordState with ChangeNotifier {
 
+  final WorkoutRecordRepository _repository;
   final WorkoutRecord _workoutRecord;
 
   WorkoutRecord get workoutRecord => _workoutRecord;
 
-  WorkoutRecordState(this._workoutRecord);
+  WorkoutRecordState(this._workoutRecord, this._repository);
 
   String get noExerciseDisplayMessage => 'There are no exercises to display...';
 
@@ -34,6 +36,10 @@ class WorkoutRecordState with ChangeNotifier {
     final setRecord = changeSetRecord(exerciseRecord.setRecords[setRecordIndex]);
     exerciseRecord.setRecords.replaceRange(setRecordIndex, setRecordIndex + 1, [setRecord]);
     notifyListeners();
+  }
+
+  void saveRecord() {
+    _repository.saveRecord(_workoutRecord);
   }
 
 }

@@ -4,6 +4,7 @@ import 'package:workout_notebook_mobile/models/records/workout_record.dart';
 import 'package:workout_notebook_mobile/models/records_factory/workout_record_factory.dart';
 import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
 import 'package:workout_notebook_mobile/models/workouts/workout.dart';
+import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
 import 'package:workout_notebook_mobile/states/workout_record_state.dart';
 
 void main() {
@@ -42,7 +43,8 @@ WorkoutRecordState _createWorkoutRecordState() {
   );
 
   final WorkoutRecordFactory factory = WorkoutRecordFactory();
+  WorkoutRecordRepository repository = WorkoutRecordRepository();
   WorkoutRecord workoutRecord  = factory.emptyRecordFromWorkout(workout);
-  WorkoutRecordState state = WorkoutRecordState(workoutRecord);
+  WorkoutRecordState state = WorkoutRecordState(workoutRecord, repository);
   return state;
 }
