@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
+import 'package:workout_notebook_mobile/pages/navigators/pages_navigator.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/add_exercise_sheet.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/exercise_list.dart';
 import 'package:workout_notebook_mobile/pages/workout_details_page/workout_floating_button.dart';
@@ -19,7 +20,7 @@ class WorkoutDetailsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: _pageTitle(state),
-          actions: _actions(state),
+          actions: _actions(state, context),
         ),
         body: ExerciseList(
           showBottomSheet: _showUpdateExerciseBottomSheet,
@@ -69,17 +70,24 @@ class WorkoutDetailsPage extends StatelessWidget {
     );
   }
 
-  List<Widget> _actions(WorkoutDetailsState state) {
+  List<Widget> _actions(WorkoutDetailsState state, BuildContext context) {
     return state.isEditing
         ? _editingModeActions(state)
-        : _notEditingModeActions(state);
+        : _notEditingModeActions(state, context);
   }
 
-  List<Widget> _notEditingModeActions(WorkoutDetailsState state) {
+  List<Widget> _notEditingModeActions(WorkoutDetailsState state, BuildContext context) {
     return <Widget>[
       IconButton(
         icon: Icon(Icons.mode_edit),
         onPressed: state.editWorkout,
+      ),
+      IconButton(
+        icon: Icon(Icons.folder),
+        onPressed: (){
+          final navigator = Provider.of<PagesNavigator>(context, listen: false);
+          navigator.toWorkoutRecordListPage(context, state.workout);
+        },
       ),
     ];
   }

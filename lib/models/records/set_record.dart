@@ -12,4 +12,20 @@ class SetRecord {
     @required this.numberOfRepetitions,
     @required this.weight,
   });
+
+  SetRecord copyWith({
+    uuid,
+    index,
+    numberOfRepetitions,
+    weight,
+  }) {
+    return SetRecord(
+      uuid: uuid == null ? this.uuid : uuid,
+      index: index == null ? this.index : index,
+      numberOfRepetitions: numberOfRepetitions == null
+          ? this.numberOfRepetitions
+          : numberOfRepetitions,
+      weight: weight == null ? this.weight : weight,
+    );
+  }
 }
