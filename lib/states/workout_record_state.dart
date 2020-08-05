@@ -7,11 +7,11 @@ import 'package:workout_notebook_mobile/repositories/workout_record_repository.d
 class WorkoutRecordState with ChangeNotifier {
 
   final WorkoutRecordRepository _repository;
-  final WorkoutRecord _workoutRecord;
+  WorkoutRecord _workoutRecord;
 
   WorkoutRecord get workoutRecord => _workoutRecord;
 
-  WorkoutRecordState(this._workoutRecord, this._repository);
+  WorkoutRecordState(this._repository);
 
   String get noExerciseDisplayMessage => 'There are no exercises to display...';
 
@@ -40,6 +40,10 @@ class WorkoutRecordState with ChangeNotifier {
 
   void saveRecord() {
     _repository.saveRecord(_workoutRecord);
+  }
+
+  void fetchRecord(String uuid) {
+    _workoutRecord = _repository.fetchRecord(uuid);
   }
 
 }

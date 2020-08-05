@@ -34,7 +34,7 @@ class PagesNavigator {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => ChangeNotifierProvider<WorkoutRecordState>(
-          create: (context) => WorkoutRecordState(record, recordRepository),
+          create: (context) => WorkoutRecordState(recordRepository),
           child: WorkoutRecordPage(),
         ),
       ),

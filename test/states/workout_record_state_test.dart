@@ -9,26 +9,47 @@ import 'package:workout_notebook_mobile/states/workout_record_state.dart';
 
 void main() {
   test('Test no exercises to record display message', () {
-    WorkoutRecordState state = _createWorkoutRecordState();
-    expect(state.noExerciseDisplayMessage, 'There are no exercises to display...');
+    WorkoutRecord record = _createRecord();
+    WorkoutRecordState state = _createWorkoutRecordState(record);
+    expect(
+        state.noExerciseDisplayMessage, 'There are no exercises to display...');
   });
 
   test('Test get workout name', () {
-    WorkoutRecordState state = _createWorkoutRecordState();
+    WorkoutRecord record = _createRecord();
+    WorkoutRecordState state = _createWorkoutRecordState(record);
+    state.fetchRecord(record.uuid);
     expect(state.workoutName, 'workout_name');
   });
 
-
-
   test('Test get exercise records', () {
-    WorkoutRecordState state = _createWorkoutRecordState();
-
+    WorkoutRecord record = _createRecord();
+    WorkoutRecordState state = _createWorkoutRecordState(record);
+    state.fetchRecord(record.uuid);
     List<ExerciseRecord> exerciseRecords = state.exerciseRecords;
     expect(exerciseRecords.length, 1);
   });
+
+  test('Test fetch record', () {
+    WorkoutRecord record = _createRecord();
+    WorkoutRecordState state = _createWorkoutRecordState(record);
+    expect(state.workoutRecord, null);
+  });
 }
 
-WorkoutRecordState _createWorkoutRecordState() {
+WorkoutRecordState _createWorkoutRecordState(WorkoutRecord record) {
+  WorkoutRecordRepository repository = _createRepository(record);
+  WorkoutRecordState state = WorkoutRecordState(repository);
+  return state;
+}
+
+WorkoutRecordRepository _createRepository(WorkoutRecord record) {
+  WorkoutRecordRepository repository = WorkoutRecordRepository([record]);
+  return repository;
+}
+
+WorkoutRecord _createRecord() {
+
   Exercise exercise = Exercise(
     uuid: 'exercise_uuid',
     name: 'exercise_name',
@@ -37,14 +58,9 @@ WorkoutRecordState _createWorkoutRecordState() {
     restTimeInSeconds: 90,
   );
   Workout workout = Workout(
-      name: 'workout_name',
-      uuid: 'workout_uuid',
-      exercises: [exercise]
-  );
+      name: 'workout_name', uuid: 'workout_uuid', exercises: [exercise]);
 
   final WorkoutRecordFactory factory = WorkoutRecordFactory();
-  WorkoutRecordRepository repository = WorkoutRecordRepository();
-  WorkoutRecord workoutRecord  = factory.emptyRecordFromWorkout(workout);
-  WorkoutRecordState state = WorkoutRecordState(workoutRecord, repository);
-  return state;
+  WorkoutRecord workoutRecord = factory.emptyRecordFromWorkout(workout);
+  return workoutRecord;
 }

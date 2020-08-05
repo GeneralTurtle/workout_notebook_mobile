@@ -7,11 +7,11 @@ import 'package:workout_notebook_mobile/repositories/workout_record_repository.d
 
 void main() {
   test('Test save workout record', () {
-    WorkoutRecordRepository repository = WorkoutRecordRepository();
-    WorkoutRecord record = _createWorkoutRecord();
+    WorkoutRecordRepository repository = WorkoutRecordRepository([]);
 
     expect(repository.workoutRecords.length, 0);
 
+    WorkoutRecord record = _createWorkoutRecord();
     repository.saveRecord(record);
     expect(repository.workoutRecords.length, 1);
     expect(repository.workoutRecords[0].uuid, record.uuid);
