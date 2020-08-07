@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         Provider(
           create: (context) => PagesNavigator(),
         ),
-        Provider<WorkoutRecordRepository>(create: (context) => WorkoutRecordRepository([]),),
+        Provider<WorkoutRecordRepository>(create: (context) => WorkoutRecordRepository(),),
         ChangeNotifierProvider<WorkoutsState>(
           create: (context) => WorkoutsState(),
         ),

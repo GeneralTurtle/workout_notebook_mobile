@@ -29,8 +29,7 @@ class WorkoutRecordPage extends StatelessWidget {
   }
 
   void _saveRecord(BuildContext context, WorkoutRecordState state) {
-
-    final repository = Provider.of<WorkoutRecordRepository>(context);
+    final repository = Provider.of<WorkoutRecordRepository>(context, listen: false);
     repository.saveRecord(state.workoutRecord);
   }
 

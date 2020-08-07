@@ -1,9 +1,9 @@
 import 'package:workout_notebook_mobile/models/records/workout_record.dart';
 
 class WorkoutRecordRepository {
-  final List<WorkoutRecord> _workoutRecords;
+  final List<WorkoutRecord> _workoutRecords = [];
 
-  WorkoutRecordRepository(this._workoutRecords);
+  WorkoutRecordRepository();
 
   List<WorkoutRecord> get workoutRecords => _workoutRecords;
 

@@ -7,7 +7,7 @@ import 'package:workout_notebook_mobile/repositories/workout_record_repository.d
 
 void main() {
   test('Test save workout record', () {
-    WorkoutRecordRepository repository = WorkoutRecordRepository([]);
+    WorkoutRecordRepository repository = WorkoutRecordRepository();
 
     expect(repository.workoutRecords.length, 0);
 
