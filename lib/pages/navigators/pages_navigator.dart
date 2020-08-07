@@ -28,10 +28,12 @@ class PagesNavigator {
   }
 
   void _toWorkoutRecordPage(BuildContext context, WorkoutRecord record) {
-    MaterialPageRoute(
-      builder: (context) => ChangeNotifierProvider<WorkoutRecordState>(
-        create: (context) => WorkoutRecordState(record),
-        child: WorkoutRecordPage(),
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider<WorkoutRecordState>(
+          create: (context) => WorkoutRecordState(record),
+          child: WorkoutRecordPage(),
+        ),
       ),
     );
   }
