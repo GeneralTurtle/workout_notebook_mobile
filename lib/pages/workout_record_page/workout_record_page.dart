@@ -2,29 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_notebook_mobile/models/records/exercise_record.dart';
 import 'package:workout_notebook_mobile/models/records/set_record.dart';
+import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
 import 'package:workout_notebook_mobile/states/workout_record_state.dart';
 
 class WorkoutRecordPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<WorkoutRecordState>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Record: ${state.workoutName}'),
-        actions: _buildActions(state),
+        actions: _buildActions(state, context),
       ),
       body: _pageBody(state),
     );
   }
 
-  List<Widget> _buildActions(WorkoutRecordState state) {
+  List<Widget> _buildActions(WorkoutRecordState state, BuildContext context) {
     return <Widget>[
       IconButton(
-        onPressed: () => state.saveRecord(),
+        onPressed: () => _saveRecord(context, state),
         icon: Icon(Icons.save),
       ),
     ];
+  }
+
+  void _saveRecord(BuildContext context, WorkoutRecordState state) {
+
+    final repository = Provider.of<WorkoutRecordRepository>(context);
+    repository.saveRecord(state.workoutRecord);
   }
 
   Widget _pageBody(WorkoutRecordState state) {
