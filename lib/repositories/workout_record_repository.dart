@@ -10,9 +10,4 @@ class WorkoutRecordRepository {
   void saveRecord(WorkoutRecord record) {
     _workoutRecords.add(record);
   }
-
-  WorkoutRecord fetchRecord(String uuid) {
-    return _workoutRecords.firstWhere((element) => element.uuid ==  uuid);
-  }
-
 }
