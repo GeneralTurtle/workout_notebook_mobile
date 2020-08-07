@@ -8,6 +8,7 @@ import 'package:workout_notebook_mobile/pages/workout_record_list_page/workout_r
 import 'package:workout_notebook_mobile/pages/workout_record_page/workout_record_page.dart';
 import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
 import 'package:workout_notebook_mobile/states/workout_details_state.dart';
+import 'package:workout_notebook_mobile/states/workout_record_list_state.dart';
 import 'package:workout_notebook_mobile/states/workout_record_state.dart';
 
 class PagesNavigator {
@@ -29,12 +30,10 @@ class PagesNavigator {
   }
 
   void _toWorkoutRecordPage(BuildContext context, WorkoutRecord record) {
-    final recordRepository =
-    Provider.of<WorkoutRecordRepository>(context, listen: false);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => ChangeNotifierProvider<WorkoutRecordState>(
-          create: (context) => WorkoutRecordState(record, recordRepository),
+          create: (context) => WorkoutRecordState(record),
           child: WorkoutRecordPage(),
         ),
       ),
@@ -46,9 +45,14 @@ class PagesNavigator {
   }
 
   void toWorkoutRecordListPage(BuildContext context, Workout workout) {
+    final repository = Provider.of<WorkoutRecordRepository>(context, listen: false);
+    final records = repository.fetchRecords(workout.uuid);
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => WorkoutRecordListPage(),
+        builder: (context) => Provider<WorkoutRecordListState>(
+          create: (context) => WorkoutRecordListState(records),
+          child: WorkoutRecordListPage(),
+        ),
       ),
     );
   }

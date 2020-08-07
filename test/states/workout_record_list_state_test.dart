@@ -3,22 +3,20 @@ import 'package:workout_notebook_mobile/models/records/workout_record.dart';
 import 'package:workout_notebook_mobile/models/records_factory/workout_record_factory.dart';
 import 'package:workout_notebook_mobile/models/workouts/exercise.dart';
 import 'package:workout_notebook_mobile/models/workouts/workout.dart';
-import 'package:workout_notebook_mobile/repositories/workout_record_repository.dart';
+import 'package:workout_notebook_mobile/states/workout_record_list_state.dart';
 
 void main() {
-  test('Test save workout record', () {
-    WorkoutRecordRepository repository = WorkoutRecordRepository();
+  test('Test has records', () {
+    WorkoutRecordListState state = WorkoutRecordListState([]);
+    expect(state.hasRecords, false);
 
-    expect(repository.workoutRecords.length, 0);
-
-    WorkoutRecord record = _createWorkoutRecord();
-    repository.saveRecord(record);
-    expect(repository.workoutRecords.length, 1);
-    expect(repository.workoutRecords[0].uuid, record.uuid);
+    final record = _createRecord();
+    state = WorkoutRecordListState([record]);
+    expect(state.hasRecords, true);
   });
 }
 
-WorkoutRecord _createWorkoutRecord() {
+WorkoutRecord _createRecord() {
   Exercise exercise = Exercise(
     uuid: 'exercise_uuid',
     name: 'exercise_name',
