@@ -10,4 +10,8 @@ class WorkoutRecordRepository {
   void saveRecord(WorkoutRecord record) {
     _workoutRecords.add(record);
   }
+
+  List<WorkoutRecord> fetchRecords(String workoutUuid) {
+    return _workoutRecords.where((element) => element.workoutUuid == workoutUuid).toList();
+  }
 }

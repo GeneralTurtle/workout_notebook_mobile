@@ -46,7 +46,7 @@ class PagesNavigator {
 
   void toWorkoutRecordListPage(BuildContext context, Workout workout) {
     final repository = Provider.of<WorkoutRecordRepository>(context, listen: false);
-    final records = repository.workoutRecords;
+    final records = repository.fetchRecords(workout.uuid);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Provider<WorkoutRecordListState>(
